@@ -1,0 +1,43 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:scoreboard2.ViewModels"
+             xmlns:c="clr-namespace:scoreboard2.Controls"
+             mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="250"
+             x:Class="scoreboard2.Views.MainView"
+             x:DataType="vm:MainViewModel">
+    <Design.DataContext>
+    <!-- This only sets the DataContext for the previewer in an IDE,
+         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+    <vm:MainViewModel />
+    </Design.DataContext>
+
+    <!-- <StackPanel> -->
+    <!--     <Grid Name="HomeGrid" ColumnDefinitions="*, Auto"> -->
+    <!--         <Label Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left">HOME</Label> -->
+    <!--         <controls:ScoreButtonsControl Name="HomeControl" Grid.Column="1" Score="1" /> -->
+    <!--     </Grid> -->
+    <!--     <Grid Name="AwayGrid" ColumnDefinitions="*, Auto"> -->
+    <!--         <Label Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left">AWAY</Label> -->
+    <!--         <controls:ScoreButtonsControl Name="AwayControl" Grid.Column="1" Score="1" /> -->
+    <!--     </Grid> -->
+    <!--     <Grid Name="PeriodGrid" ColumnDefinitions="*, Auto"> -->
+    <!--         <Label Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left">PERIOD</Label> -->
+    <!--         <controls:PeriodButtonsControl Name="PeriodControl" Grid.Column="1" Period="1" /> -->
+    <!--     </Grid> -->
+    <!-- </StackPanel> -->
+    
+    <Grid Margin="5" ColumnDefinitions="*, *" RowDefinitions="Auto, Auto">
+        <c:QuickNumberControl Grid.Column="0" Grid.Row="0" Title="{Binding HomeTitleProperty}" 
+                        CommitClickFunction="{Binding HomeCommit}"
+                        CurrentValue="{Binding HomeScore}" />
+        <c:QuickNumberControl Grid.Column="1" Grid.Row="0" Title="{Binding AwayTitleProperty}" 
+                        CommitClickFunction="{Binding AwayCommit}"
+                        CurrentValue="{Binding AwayScore}" />
+        <c:QuickNumberControl Classes="period" Grid.Column="0" Grid.Row="1" Title="{Binding PeriodTitleProperty}"
+                        CommitClickFunction="{Binding PeriodCommit}"
+                        CurrentValue="{Binding Period}" />
+    </Grid>
+  
+</UserControl>

@@ -1,0 +1,36 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:c="using:scoreboard2.Controls"
+        xmlns:cv="using:scoreboard2.Converters">
+    <Design.PreviewWith>
+        <Grid ColumnDefinitions="Auto, *, Auto" Width="400" Margin="5">
+            <Label Grid.Column="0" VerticalAlignment="Center">PERIOD</Label>
+            <Border Grid.Column="2" BorderThickness="1" BorderBrush="Black">
+                <c:PeriodButtonsControl />
+            </Border>
+        </Grid>
+    </Design.PreviewWith>
+
+    <Style Selector="c|PeriodButtonsControl">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <StackPanel Orientation="Horizontal">
+                    <Button Name="ButtonSubtract" 
+                            Command="{TemplateBinding ButtonClickFunction}"
+                            CommandParameter="{Binding $self.Content}"
+                            >-1</Button>
+                    <Border BorderThickness="1" BorderBrush="Black">
+                        <TextBox VerticalAlignment="Center" HorizontalContentAlignment="Center" 
+                               Text="{TemplateBinding Property=Period, Converter={x:Static cv:TextBoxInt2StringConverter.Instance}}" 
+                               Width="{TemplateBinding PeriodBoundsWidth}"/>
+                    </Border>
+                    <Button Name="ButtonAdd"
+                            Command="{TemplateBinding ButtonClickFunction}"
+                            CommandParameter="{Binding $self.Content}"
+                            >+1</Button>
+                </StackPanel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

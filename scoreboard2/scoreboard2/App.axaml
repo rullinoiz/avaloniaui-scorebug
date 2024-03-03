@@ -1,0 +1,19 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="using:scoreboard2"
+             x:Class="scoreboard2.App"
+             RequestedThemeVariant="Default">
+             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+
+    <Application.DataTemplates>
+        <local:ViewLocator/>
+    </Application.DataTemplates>
+
+    <Application.Styles>
+        <FluentTheme />
+        <StyleInclude Source="avares://scoreboard2/Controls/ScoreButtonsControl.axaml" />
+        <StyleInclude Source="avares://scoreboard2/Controls/PeriodButtonsControl.axaml" />
+        <StyleInclude Source="avares://scoreboard2/Controls/PeriodControl.axaml" />
+        <StyleInclude Source="avares://scoreboard2/Controls/QuickNumberControl.axaml" />
+    </Application.Styles>
+</Application>

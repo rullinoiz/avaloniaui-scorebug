@@ -1,0 +1,37 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:scoreboard2.Controls">
+    <Design.PreviewWith>
+        <Grid ColumnDefinitions="Auto, *, Auto" Width="400" Margin="5">
+            <Label Grid.Column="0" VerticalAlignment="Center">HOME</Label>
+            <Border Grid.Column="2" BorderThickness="1" BorderBrush="Black">
+                <controls:ScoreButtonsControl />
+            </Border>
+        </Grid>
+    </Design.PreviewWith>
+
+    <Style Selector="controls|ScoreButtonsControl">
+        <!-- Set Defaults -->
+        <Style Selector="^Button">
+            <Setter Property="CommandParameter" Value="{Binding $self.Content}" />
+        </Style>
+        
+        <Setter Property="Template">
+            <ControlTemplate>
+                <StackPanel Orientation="Horizontal">
+                    <Button Command="{TemplateBinding ButtonClickFunction}">-1</Button>
+                    <Border BorderThickness="1" BorderBrush="Black">
+                        <Label VerticalAlignment="Center" HorizontalContentAlignment="Center" 
+                               Content="{TemplateBinding Score}" 
+                               Width="{TemplateBinding ScoreBoundsWidth}"/>
+                    </Border>
+                    <Button Command="{TemplateBinding ButtonClickFunction}">+1</Button>
+                    <Button Command="{TemplateBinding ButtonClickFunction}">+2</Button>
+                    <Button Command="{TemplateBinding ButtonClickFunction}">+3</Button>
+                </StackPanel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    
+    
+</Styles>
