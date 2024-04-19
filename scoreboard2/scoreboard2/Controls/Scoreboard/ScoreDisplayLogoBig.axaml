@@ -1,0 +1,25 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:converters="using:scoreboard2.Converters"
+        xmlns:controls="using:scoreboard2.Controls.Scoreboard">
+    <Design.PreviewWith>
+        <Border Width="100" Height="125">
+            <controls:ScoreDisplayLogoBig />
+        </Border>
+    </Design.PreviewWith>
+
+    <Style Selector="controls|ScoreDisplayLogoBig">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <StackPanel Name="PART_StackPanel" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+                    <Label Name="PART_Label" 
+                           Foreground="{TemplateBinding FontColor, Converter={x:Static converters:AvaloniaStaticConverters.ColorToBrushConverter}}" 
+                           FontSize="50" FontFamily="{StaticResource RubikFont}" 
+                           HorizontalContentAlignment="Center" Content="{TemplateBinding Value}" />
+                    <Image Name="PART_Image" Width="50" Height="50" Source="{TemplateBinding Image}" />
+                </StackPanel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

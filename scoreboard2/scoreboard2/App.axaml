@@ -1,19 +1,31 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="using:scoreboard2"
+             xmlns:dt="using:scoreboard2.Common.DataTemplates"
              x:Class="scoreboard2.App"
              RequestedThemeVariant="Default">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
     <Application.DataTemplates>
         <local:ViewLocator/>
+        <dt:ScoreControlDataTemplate/>
     </Application.DataTemplates>
 
     <Application.Styles>
-        <FluentTheme />
+        <SimpleTheme />
+        <StyleInclude Source="avares://Avalonia.Controls.ColorPicker/Themes/Fluent/Fluent.xaml" />
+        
         <StyleInclude Source="avares://scoreboard2/Controls/ScoreButtonsControl.axaml" />
         <StyleInclude Source="avares://scoreboard2/Controls/PeriodButtonsControl.axaml" />
         <StyleInclude Source="avares://scoreboard2/Controls/PeriodControl.axaml" />
         <StyleInclude Source="avares://scoreboard2/Controls/QuickNumberControl.axaml" />
+        <StyleInclude Source="avares://scoreboard2/Controls/QuickImageControl.axaml" />
+        <StyleInclude Source="avares://scoreboard2/Controls/QuickColorControl.axaml" />
+        <StyleInclude Source="avares://scoreboard2/Controls/ConfigEnclosureControl.axaml" />
+        <StyleInclude Source="avares://scoreboard2/Controls/Scoreboard/ScoreDisplayLogoBig.axaml" />
     </Application.Styles>
+             
+    <Application.Resources>
+        <FontFamily x:Key="RubikFont">avares://scoreboard2/Common/Assets/Fonts#Rubik</FontFamily>
+    </Application.Resources>
 </Application>

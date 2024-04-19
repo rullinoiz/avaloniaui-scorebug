@@ -1,0 +1,17 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:c="using:scoreboard2.Controls"
+             xmlns:vm="using:scoreboard2.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="scoreboard2.Views.ScorebugConfigView"
+             x:DataType="vm:MainViewModel">
+    
+    <Grid Margin="5" ColumnDefinitions="*, *" RowDefinitions="Auto, Auto, Auto, Auto">
+        <c:QuickImageControl Grid.Column="0" Grid.Row="0" Title="HOME IMAGE" Image="{Binding Game.Settings.HomeImage, Mode=TwoWay}" />
+        <c:QuickImageControl Grid.Column="1" Grid.Row="0" Title="AWAY IMAGE" Image="{Binding Game.Settings.AwayImage, Mode=TwoWay}" />
+        <c:QuickColorControl Grid.Column="0" Grid.Row="1" Title="HOME BG" Grid.RowSpan="2" Color="{Binding Game.Settings.HomeBackgroundColor, Mode=TwoWay}"/>
+        <c:QuickColorControl Grid.Column="1" Grid.Row="1" Title="AWAY BG" Grid.RowSpan="2" Color="{Binding Game.Settings.AwayBackgroundColor, Mode=TwoWay}"/>
+    </Grid>
+</UserControl>

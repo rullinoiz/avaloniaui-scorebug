@@ -1,6 +1,7 @@
+using System;
 using Avalonia.Controls;
 
-namespace scoreboard2.Views;
+namespace scoreboard2.Windows;
 
 public partial class MainWindow : Window
 {
@@ -8,4 +9,7 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
     }
+    
+    
+    
 }

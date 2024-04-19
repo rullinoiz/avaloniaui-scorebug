@@ -1,0 +1,30 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:scoreboard2.ViewModels"
+             xmlns:c="using:scoreboard2.Controls.Scoreboard"
+             xmlns:converters="using:scoreboard2.Converters"
+             mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="100"
+             x:DataType="vm:MainViewModel"
+             x:Class="scoreboard2.Views.ScoreboardView">
+    
+    <Grid ColumnDefinitions="*, 270, *" ShowGridLines="True">
+        <Border Grid.Column="0" Background="{Binding Game.Settings.HomeBackgroundColor, Converter={x:Static converters:AvaloniaStaticConverters.ColorToBrushConverter}}">
+            <c:ScoreDisplayLogoBig Value="{Binding Game.HomeScore}" 
+                                   Image="{Binding Game.Settings.HomeImage}" 
+                                   FontColor="{Binding Game.Settings.HomeForegroundColor}" />
+        </Border>
+        <Border Grid.Column="1">
+            <StackPanel Orientation="Horizontal">
+                
+            </StackPanel>
+        </Border>
+        <Border Grid.Column="2" Background="{Binding Game.Settings.AwayBackgroundColor, Converter={x:Static converters:AvaloniaStaticConverters.ColorToBrushConverter}}">
+            <c:ScoreDisplayLogoBig Value="{Binding Game.AwayScore}" 
+                                   Image="{Binding Game.Settings.AwayImage}"
+                                   FontColor="{Binding Game.Settings.AwayForegroundColor}" />
+        </Border>
+    </Grid>
+    
+</UserControl>

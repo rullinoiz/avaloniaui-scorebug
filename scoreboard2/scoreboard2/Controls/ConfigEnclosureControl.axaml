@@ -1,0 +1,26 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:scoreboard2.Controls">
+    <Design.PreviewWith>
+        <controls:ConfigEnclosureControl />
+    </Design.PreviewWith>
+
+    <Style Selector="controls|ConfigEnclosureControl">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border BorderBrush="Black" BorderThickness="2" CornerRadius="5">
+                    <Grid Margin="5" RowDefinitions="*, Auto">
+                        <Grid Grid.Row="0" RowDefinitions="*, Auto">
+                            <Grid Grid.Row="0" ColumnDefinitions="*, Auto">
+                                <Label Grid.Column="0" Content="{TemplateBinding Title}" />
+                                <ContentPresenter Grid.Column="1" Content="{TemplateBinding Value, Mode=TwoWay}" />
+                            </Grid>
+                            <ContentPresenter Grid.Row="1" Content="{TemplateBinding Content}" />
+                        </Grid>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

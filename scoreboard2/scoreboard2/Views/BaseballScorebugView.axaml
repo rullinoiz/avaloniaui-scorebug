@@ -1,0 +1,27 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:scoreboard2.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:c="clr-namespace:scoreboard2.Controls"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="vm:MainViewModel"
+             x:Class="scoreboard2.Views.BaseballScorebugView">
+    
+    
+    
+    <Grid Margin="5" ColumnDefinitions="*, *" RowDefinitions="Auto, Auto, Auto">
+        
+        <c:QuickNumberControl Grid.Column="0" Grid.Row="0" Title="{Binding HomeTitleProperty}" 
+                              CommitClickFunction="{Binding HomeCommit}"
+                              CurrentValue="{Binding HomeScore}" />
+        <c:QuickNumberControl Grid.Column="1" Grid.Row="0" Title="{Binding AwayTitleProperty}" 
+                              CommitClickFunction="{Binding AwayCommit}"
+                              CurrentValue="{Binding AwayScore}" />
+        <c:QuickNumberControl Classes="period" Grid.Column="0" Grid.Row="1" Title="{Binding PeriodTitleProperty}"
+                              CommitClickFunction="{Binding PeriodCommit}"
+                              CurrentValue="{Binding Period}" />
+        
+    </Grid>
+    
+</UserControl>
