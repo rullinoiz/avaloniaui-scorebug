@@ -23,11 +23,16 @@
                                    FontColor="{Binding Game.Settings.HomeForegroundColor}" />
         </Border>
         <Grid ColumnDefinitions="*, 125, *" Grid.Column="1" VerticalAlignment="Center" Background="Black">
-            <c:InningDisplayBig Grid.Column="0" Inning="{Binding Game.Period}" />
-            <StackPanel Grid.Column="1" HorizontalAlignment="Center" Spacing="-20">
-                <c:BaseDisplayBig Base="{Binding Game.Base}" />
-                <c:DotValueDisplaySmall HorizontalAlignment="Center" Max="3" Value="{Binding Game.Outs.Value}" />
-            </StackPanel>
+            <Border Grid.Column="0">
+                <c:InningDisplayBig Inning="{Binding Game.Period}" />
+            </Border>
+            <Border Grid.Column="1">
+                <StackPanel HorizontalAlignment="Center" Spacing="-20">
+                    <c:BaseDisplayBig Base="{Binding Game.Base}" />
+                    <c:DotValueDisplaySmall HorizontalAlignment="Center" Max="3" Value="{Binding Game.Outs.Value}" />
+                </StackPanel>
+            </Border>
+            
             <StackPanel Grid.Column="2" VerticalAlignment="Center" Spacing="15">
                 <StackPanel Orientation="Horizontal">
                     <Label HorizontalAlignment="Left">B</Label>

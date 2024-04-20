@@ -9,8 +9,8 @@
         <Setter Property="Fill" Value="#ff442d0a" />
         <Setter Property="Width" Value="30" />
         <Setter Property="Height" Value="30" />
-        <Setter Property="Stroke" Value="Gray" />
-        <Setter Property="StrokeThickness" Value="2" />
+        <!-- <Setter Property="Stroke" Value="Gray" /> -->
+        <!-- <Setter Property="StrokeThickness" Value="2" /> -->
     </Style>
 
     <Style Selector="c|BaseDisplayBig">
