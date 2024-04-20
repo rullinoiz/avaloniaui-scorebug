@@ -3,7 +3,7 @@
              xmlns:local="using:scoreboard2"
              xmlns:dt="using:scoreboard2.Common.DataTemplates"
              x:Class="scoreboard2.App"
-             RequestedThemeVariant="Default">
+             RequestedThemeVariant="Dark">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
     <Application.DataTemplates>
