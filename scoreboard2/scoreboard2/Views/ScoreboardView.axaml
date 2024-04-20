@@ -20,7 +20,7 @@
         <Border Grid.Column="0" Background="{Binding Game.Settings.HomeBackgroundColor, Converter={x:Static converters:AvaloniaStaticConverters.ColorToBrushConverter}}">
             <c:ScoreDisplayLogoBig Value="{Binding Game.HomeScore.Value}" 
                                    Image="{Binding Game.Settings.HomeImage}" 
-                                   />
+                                   FontColor="{Binding Game.Settings.HomeForegroundColor}" />
         </Border>
         <Grid ColumnDefinitions="*, 125, *" Grid.Column="1" VerticalAlignment="Center" Background="Black">
             <c:InningDisplayBig Grid.Column="0" Inning="{Binding Game.Period}" />
@@ -42,7 +42,7 @@
         <Border Grid.Column="2" Background="{Binding Game.Settings.AwayBackgroundColor, Converter={x:Static converters:AvaloniaStaticConverters.ColorToBrushConverter}}">
             <c:ScoreDisplayLogoBig Value="{Binding Game.AwayScore.Value}" 
                                    Image="{Binding Game.Settings.AwayImage}"
-                                   />
+                                   FontColor="{Binding Game.Settings.AwayForegroundColor}" />
         </Border>
     </Grid>
     
