@@ -1,7 +1,9 @@
 using System;
+using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
+using Avalonia.Input;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform.Storage;
 
@@ -44,5 +46,30 @@ public class QuickImageControl : TemplatedControl
         await using var stream = await files[0].OpenReadAsync();
         var result = new Bitmap(stream);
         Image = result;
+    }
+
+    private static void DragOver(object? sender, DragEventArgs e)
+    {
+        e.DragEffects &= (DragDropEffects.Copy | DragDropEffects.Link);
+
+        if (!e.Data.Contains(DataFormats.Files)) e.DragEffects = DragDropEffects.None;
+    }
+
+    private void Drop(object? sender, DragEventArgs e)
+    {
+        if (!e.Data.Contains(DataFormats.Files)) return;
+        var files = e.Data.GetFiles();
+        var path = files?.First().TryGetLocalPath() ?? string.Empty;
+        try
+        {
+            Image = new Bitmap(path);
+        }
+        catch (ArgumentException) { }
+    }
+
+    protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
+    {
+        AddHandler(DragDrop.DropEvent, Drop);
+        AddHandler(DragDrop.DragOverEvent, DragOver);
     }
 }

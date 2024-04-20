@@ -1,0 +1,35 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:c="using:scoreboard2.Controls.Scoreboard">
+    <Design.PreviewWith>
+        <c:BaseDisplayBig />
+    </Design.PreviewWith>
+    
+    <Style Selector="c|BaseDisplayBig /template/ :is(Rectangle)">
+        <Setter Property="Fill" Value="#ff442d0a" />
+        <Setter Property="Width" Value="30" />
+        <Setter Property="Height" Value="30" />
+        <Setter Property="Stroke" Value="Gray" />
+        <Setter Property="StrokeThickness" Value="2" />
+    </Style>
+
+    <Style Selector="c|BaseDisplayBig">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Height="100">
+                    <Border.RenderTransform>
+                        <RotateTransform Angle="45" />
+                    </Border.RenderTransform>
+                    <StackPanel Orientation="Vertical" Spacing="5" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="5">
+                            <Rectangle Name="Base1" />
+                            <Rectangle Name="Base2" />
+                        </StackPanel>
+                        <Rectangle HorizontalAlignment="Left" Name="Base3" />
+                    </StackPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

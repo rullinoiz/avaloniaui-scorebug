@@ -5,25 +5,44 @@
              xmlns:vm="using:scoreboard2.ViewModels"
              xmlns:c="using:scoreboard2.Controls.Scoreboard"
              xmlns:converters="using:scoreboard2.Converters"
-             mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="100"
+             mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="125"
              x:DataType="vm:MainViewModel"
              x:Class="scoreboard2.Views.ScoreboardView">
     
-    <Grid ColumnDefinitions="*, 270, *" ShowGridLines="True">
+    <UserControl.Styles>
+        <Style Selector=":is(Label)">
+            <Setter Property="FontFamily" Value="{StaticResource RubikFont}" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+    </UserControl.Styles>
+    
+    <Grid ColumnDefinitions="*, 300, *" ShowGridLines="False">
         <Border Grid.Column="0" Background="{Binding Game.Settings.HomeBackgroundColor, Converter={x:Static converters:AvaloniaStaticConverters.ColorToBrushConverter}}">
-            <c:ScoreDisplayLogoBig Value="{Binding Game.HomeScore}" 
+            <c:ScoreDisplayLogoBig Value="{Binding Game.HomeScore.Value}" 
                                    Image="{Binding Game.Settings.HomeImage}" 
-                                   FontColor="{Binding Game.Settings.HomeForegroundColor}" />
+                                   />
         </Border>
-        <Border Grid.Column="1">
-            <StackPanel Orientation="Horizontal">
-                
+        <Grid ColumnDefinitions="*, 125, *" Grid.Column="1" VerticalAlignment="Center" Background="Black">
+            <c:InningDisplayBig Grid.Column="0" Inning="{Binding Game.Period}" />
+            <StackPanel Grid.Column="1" HorizontalAlignment="Center" Spacing="-20">
+                <c:BaseDisplayBig Base="{Binding Game.Base}" />
+                <c:DotValueDisplaySmall HorizontalAlignment="Center" Max="3" Value="{Binding Game.Outs.Value}" />
             </StackPanel>
-        </Border>
+            <StackPanel Grid.Column="2" VerticalAlignment="Center" Spacing="15">
+                <StackPanel Orientation="Horizontal">
+                    <Label HorizontalAlignment="Left">B</Label>
+                    <c:DotValueDisplaySmall Max="3" Value="{Binding Game.Balls.Value}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label HorizontalAlignment="Left">S</Label>
+                    <c:DotValueDisplaySmall Max="2" Value="{Binding Game.Strikes.Value}" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
         <Border Grid.Column="2" Background="{Binding Game.Settings.AwayBackgroundColor, Converter={x:Static converters:AvaloniaStaticConverters.ColorToBrushConverter}}">
-            <c:ScoreDisplayLogoBig Value="{Binding Game.AwayScore}" 
+            <c:ScoreDisplayLogoBig Value="{Binding Game.AwayScore.Value}" 
                                    Image="{Binding Game.Settings.AwayImage}"
-                                   FontColor="{Binding Game.Settings.AwayForegroundColor}" />
+                                   />
         </Border>
     </Grid>
     

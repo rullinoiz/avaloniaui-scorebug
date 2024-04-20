@@ -1,64 +1,43 @@
 using System;
-using System.Windows.Input;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
+using scoreboard2.Models;
 
 namespace scoreboard2.Controls;
 
 public class PeriodControl : TemplatedControl
 {
-    public static readonly StyledProperty<string> TitleProperty = AvaloniaProperty.Register<PeriodControl, string>(
-        "Title", "PERIOD");
+    public static readonly StyledProperty<Period> PeriodProperty = AvaloniaProperty.Register<PeriodControl, Period>(
+        "Period");
 
-    public string Title
+    public Period Period
     {
-        get => GetValue(TitleProperty);
-        set => SetValue(TitleProperty, value);
-    }
-
-    public static readonly StyledProperty<int> OldPeriodProperty = AvaloniaProperty.Register<PeriodControl, int>(
-        "OldPeriod");
-
-    public int OldPeriod
-    {
-        get => GetValue(OldPeriodProperty);
-        set => SetValue(OldPeriodProperty, value);
-    }
-
-    public static readonly StyledProperty<int> NewPeriodProperty = AvaloniaProperty.Register<PeriodControl, int>(
-        "NewPeriod");
-
-    public int NewPeriod
-    {
-        get => GetValue(NewPeriodProperty);
-        set => SetValue(NewPeriodProperty, value);
+        get => GetValue(PeriodProperty);
+        set => SetValue(PeriodProperty, value);
     }
     
-    public static readonly StyledProperty<ICommand> ButtonClickFunctionProperty = AvaloniaProperty.Register<ScoreButtonsControl, ICommand>(
-        "ButtonClickFunction");
-
-    public ICommand ButtonClickFunction
+    private TextBox? _editValue;
+    
+    public void ButtonClickFunction(int value)
     {
-        get => GetValue(ButtonClickFunctionProperty);
-        set => SetValue(ButtonClickFunctionProperty, value);
+        _editValue!.Text = (int.Parse(_editValue.Text!) + value).ToString();
     }
 
-    public static readonly StyledProperty<ICommand> CommitClickFunctionProperty = AvaloniaProperty.Register<PeriodControl, ICommand>(
-        "CommitClickFunction");
-
-    public ICommand CommitClickFunction
+    public void CommitClickFunction()
     {
-        get => GetValue(CommitClickFunctionProperty);
-        set => SetValue(CommitClickFunctionProperty, value);
+        Period.Value = int.Parse(_editValue!.Text ?? string.Empty);
+    }
+    
+    protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
+    {
+        base.OnApplyTemplate(e);
+        _editValue = e.NameScope.Find<TextBox>(name:"EditValueBox")!;
+        Console.WriteLine($"Loaded {Period.Name}!");
     }
 
-    public static readonly StyledProperty<ICommand> RevertClickFunctionProperty = AvaloniaProperty.Register<PeriodControl, ICommand>(
-        "RevertClickFunction");
-
-    public ICommand RevertClickFunction
+    public PeriodControl()
     {
-        get => GetValue(RevertClickFunctionProperty);
-        set => SetValue(RevertClickFunctionProperty, value);
+        Period = new Period();
     }
 }

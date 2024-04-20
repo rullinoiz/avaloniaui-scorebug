@@ -1,0 +1,46 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:c="using:scoreboard2.Controls">
+    <Design.PreviewWith>
+        <c:ScoreControl />
+    </Design.PreviewWith>
+    
+    <Style Selector="c|ScoreControl /template/ :is(Button)[Tag=Modify]">
+        <Setter Property="Command" Value="{Binding ButtonClickFunction, RelativeSource={RelativeSource TemplatedParent}}" />
+        <Setter Property="CommandParameter" Value="{Binding $self.Content}" />
+    </Style>
+    
+    <Style Selector="c|ScoreControl /template/ :is(Button)[Content=Commit]">
+        <Setter Property="Command" Value="{Binding Score.Commit, RelativeSource={RelativeSource TemplatedParent}}" />
+    </Style> 
+    
+    <Style Selector="c|ScoreControl /template/ :is(Button)[Content=Undo]">
+        <Setter Property="Command" Value="{Binding Score.Undo, RelativeSource={RelativeSource TemplatedParent}}" />
+    </Style>
+
+    <Style Selector="c|ScoreControl">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <c:ConfigEnclosureControl Title="{Binding Score.Name, RelativeSource={RelativeSource TemplatedParent}}">
+                    <c:ConfigEnclosureControl.Value>
+                        <Label Content="{Binding Score.Value, RelativeSource={RelativeSource TemplatedParent}}" />
+                    </c:ConfigEnclosureControl.Value>
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button Tag="Modify">-1</Button>
+                            <TextBox Name="EditValueBox">0</TextBox>
+                            <Button Tag="Modify">+1</Button>
+                            <Button Tag="Modify">+2</Button>
+                            <Button Tag="Modify">+3</Button>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="5">
+                            <Button CommandParameter="{Binding #EditValueBox.Text}">Commit</Button>
+                            <Button>Undo</Button>
+                        </StackPanel>
+                    </StackPanel>
+                </c:ConfigEnclosureControl>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

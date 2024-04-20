@@ -1,0 +1,24 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:c="using:scoreboard2.Controls.Scoreboard">
+    <Design.PreviewWith>
+        <c:DotValueDisplaySmall Max="3" />
+    </Design.PreviewWith>
+    
+    <Style Selector="c|DotValueDisplaySmall /template/ :is(Ellipse)">
+        <Setter Property="Width" Value="15" />
+        <Setter Property="Height" Value="15" />
+        <Setter Property="Fill" Value="Black" />
+    </Style>
+
+    <Style Selector="c|DotValueDisplaySmall">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <StackPanel Name="StackPanel" Orientation="Horizontal" Spacing="5" Margin="3">
+
+                </StackPanel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

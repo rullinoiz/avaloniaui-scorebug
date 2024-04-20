@@ -11,7 +11,10 @@
     <Grid Margin="5" ColumnDefinitions="*, *" RowDefinitions="Auto, Auto, Auto, Auto">
         <c:QuickImageControl Grid.Column="0" Grid.Row="0" Title="HOME IMAGE" Image="{Binding Game.Settings.HomeImage, Mode=TwoWay}" />
         <c:QuickImageControl Grid.Column="1" Grid.Row="0" Title="AWAY IMAGE" Image="{Binding Game.Settings.AwayImage, Mode=TwoWay}" />
-        <c:QuickColorControl Grid.Column="0" Grid.Row="1" Title="HOME BG" Grid.RowSpan="2" Color="{Binding Game.Settings.HomeBackgroundColor, Mode=TwoWay}"/>
-        <c:QuickColorControl Grid.Column="1" Grid.Row="1" Title="AWAY BG" Grid.RowSpan="2" Color="{Binding Game.Settings.AwayBackgroundColor, Mode=TwoWay}"/>
+        
+        <c:QuickColorControl Grid.Column="0" Grid.Row="1" Title="HOME BG" Color="{Binding Game.Settings.HomeBackgroundColor, Mode=TwoWay}"/>
+        <c:QuickColorControl Grid.Column="1" Grid.Row="1" Title="AWAY BG" Color="{Binding Game.Settings.AwayBackgroundColor, Mode=TwoWay}"/>
+        <c:QuickColorControl Grid.Column="0" Grid.Row="2" Title="HOME FG" Color="{Binding Game.Settings.HomeForegroundColor, Mode=TwoWay}"/>
+        <c:QuickColorControl Grid.Column="1" Grid.Row="2" Title="AWAY FG" Color="{Binding Game.Settings.AwayForegroundColor, Mode=TwoWay}"/>
     </Grid>
 </UserControl>

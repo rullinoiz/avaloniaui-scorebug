@@ -27,15 +27,6 @@ public class QuickNumberControl : TemplatedControl
         set => SetValue(CurrentValueProperty, value);
     }
 
-    // public static readonly StyledProperty<ICommand> ButtonClickFunctionProperty = AvaloniaProperty.Register<QuickNumberControl, ICommand>(
-    //     "ButtonClickFunction");
-    //
-    // public ICommand ButtonClickFunction
-    // {
-    //     get => GetValue(ButtonClickFunctionProperty);
-    //     set => SetValue(ButtonClickFunctionProperty, value);
-    // }
-
     public static readonly StyledProperty<Action<int>> CommitClickFunctionProperty = AvaloniaProperty.Register<QuickNumberControl, Action<int>>(
         "CommitClickFunction");
 

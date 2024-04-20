@@ -8,6 +8,7 @@
 
     <ItemGroup>
         <AvaloniaResource Include="Common\Assets\**"/>
+        <AvaloniaResource Include="Controls\Common\Assets\**"/>
     </ItemGroup>
 
     <ItemGroup>

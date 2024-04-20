@@ -1,8 +1,8 @@
-namespace scoreboard2.Models;
+namespace scoreboard2.Models.Common;
 
 public interface IUndoable
 {
-    public void Undo();
+    public int Undo();
 
     public void Commit(int v);
 }

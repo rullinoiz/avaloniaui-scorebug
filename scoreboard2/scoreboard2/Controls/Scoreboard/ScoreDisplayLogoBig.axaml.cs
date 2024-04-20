@@ -1,7 +1,9 @@
+using System;
 using Avalonia;
 using Avalonia.Controls.Primitives;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
+using Avalonia.Platform;
 
 namespace scoreboard2.Controls.Scoreboard;
 
@@ -25,23 +27,25 @@ public class ScoreDisplayLogoBig : TemplatedControl
         set => SetValue(ImageProperty, value);
     }
 
-    public static readonly StyledProperty<Color> FontColorProperty = AvaloniaProperty.Register<ScoreDisplayLogoBig, Color>(
+    public static readonly StyledProperty<Color?> FontColorProperty = AvaloniaProperty.Register<ScoreDisplayLogoBig, Color?>(
         "FontColor");
 
-    public Color FontColor
+    public Color? FontColor
     {
         get => GetValue(FontColorProperty);
         set => SetValue(FontColorProperty, value);
     }
 
-    public ScoreDisplayLogoBig()
+    protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
+        base.OnApplyTemplate(e);
         try
         {
-            Image = new Bitmap("../../../../scoreboard2/Common/Assets/clist_dir.png");
+            Image = new Bitmap(AssetLoader.Open(new Uri("avares://scoreboard2/Common/Assets/clist_dir.png")));
         } 
         catch (System.IO.DirectoryNotFoundException) { }
 
-        FontColor = Colors.Black;
+        FontColor ??= Colors.Black;
+        Value = 0;
     }
 }

@@ -12,18 +12,5 @@
         Icon="/Common/Assets/avalonia-logo.ico"
         Title="Controls">
         
-        <TabControl>
-                <TabItem Header="Config">
-                        <views:ScorebugConfigView />
-                </TabItem>
-                <TabItem Header="Basketball" >
-                        <views:MainView />
-                </TabItem>
-                <TabItem Header="Baseball">
-                        <views:BaseballScorebugView />
-                </TabItem>
-        </TabControl>
-        
-        
-        
+        <views:MainView />
 </Window>

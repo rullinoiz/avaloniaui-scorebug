@@ -1,0 +1,33 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:c="using:scoreboard2.Controls">
+    <Design.PreviewWith>
+        <c:WrapAroundClickerControl />
+    </Design.PreviewWith>
+    
+    <Style Selector="c|WrapAroundClickerControl /template/ :is(Button)[Tag=Modify]">
+        <Setter Property="Command" Value="{Binding ButtonClickFunction, RelativeSource={RelativeSource TemplatedParent}}" />
+        <Setter Property="CommandParameter" Value="{Binding $self.Content}" />
+    </Style>
+
+    <Style Selector="c|WrapAroundClickerControl">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <c:ConfigEnclosureControl Title="{Binding Value.Name, RelativeSource={RelativeSource TemplatedParent}}">
+                    <c:ConfigEnclosureControl.Value>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="4">
+                            <Button Tag="Modify">-1</Button>
+                            <Label FontFamily="{StaticResource RubikFont}" VerticalAlignment="Center" Content="{Binding Value.Value, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <Button Tag="Modify">+1</Button>
+                        </StackPanel>
+                    </c:ConfigEnclosureControl.Value>
+                    <StackPanel Orientation="Horizontal" IsVisible="{TemplateBinding WrapFunction, Converter={x:Static ObjectConverters.IsNotNull}}">
+                        <CheckBox Name="EnableWrapCallback" />
+                        <Label>Enable Wrap Callback</Label>
+                    </StackPanel>
+                </c:ConfigEnclosureControl>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

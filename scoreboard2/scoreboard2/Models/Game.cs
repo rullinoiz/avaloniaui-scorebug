@@ -18,4 +18,5 @@ public partial class Game(GameSettings? settings = null) : ObservableObject
     public TemporaryNamedValue Strikes { get; } = new("STRIKES");
 
     public Inning Period { get; } = new();
+    public Base Base { get; } = new();
 }

@@ -7,10 +7,10 @@ public class Score(string name) : NamedValue(name), IUndoable
 {
     private readonly Stack<int> _previousValues = new();
 
-    public void Undo()
+    public int Undo()
     {
-        if (_previousValues.TryPop(out var v))
-            Value = v;
+        if (!_previousValues.TryPop(out var v)) return 0;
+        return Value = v;
     }
 
     public void Commit(int v)

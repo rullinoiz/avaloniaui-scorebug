@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:scoreboard2.ViewModels"
              xmlns:c="clr-namespace:scoreboard2.Controls"
+             xmlns:views="using:scoreboard2.Views"
              mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="250"
              x:Class="scoreboard2.Views.MainView"
              x:DataType="vm:MainViewModel">
@@ -28,16 +29,13 @@
     <!--     </Grid> -->
     <!-- </StackPanel> -->
     
-    <Grid Margin="5" ColumnDefinitions="*, *" RowDefinitions="Auto, Auto">
-        <c:QuickNumberControl Grid.Column="0" Grid.Row="0" Title="{Binding HomeTitleProperty}" 
-                        CommitClickFunction="{Binding HomeCommit}"
-                        CurrentValue="{Binding HomeScore}" />
-        <c:QuickNumberControl Grid.Column="1" Grid.Row="0" Title="{Binding AwayTitleProperty}" 
-                        CommitClickFunction="{Binding AwayCommit}"
-                        CurrentValue="{Binding AwayScore}" />
-        <c:QuickNumberControl Classes="period" Grid.Column="0" Grid.Row="1" Title="{Binding PeriodTitleProperty}"
-                        CommitClickFunction="{Binding PeriodCommit}"
-                        CurrentValue="{Binding Period}" />
-    </Grid>
+    <TabControl>
+        <TabItem Header="Config">
+            <views:ScorebugConfigView />
+        </TabItem>
+        <TabItem Header="Baseball">
+            <views:BaseballScorebugView />
+        </TabItem>
+    </TabControl>
   
 </UserControl>

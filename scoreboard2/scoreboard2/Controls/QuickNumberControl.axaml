@@ -20,32 +20,29 @@
         
         <Setter Property="Template">
             <ControlTemplate>
-                <Border BorderBrush="Black" BorderThickness="2" CornerRadius="5">
-                    <Grid Margin="5" RowDefinitions="*, Auto">
-                        <Grid Grid.Row="0" RowDefinitions="*, Auto">
-                            <Grid Grid.Row="0" ColumnDefinitions="*, Auto">
-                                <Label Grid.Column="0" Content="{TemplateBinding Title}" />
-                                <Label Grid.Column="1" Content="{TemplateBinding CurrentValue}" />
-                            </Grid>
-                            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Button Name="ButtonSubOne" Tag="Modify">-1</Button>
-                                <Border BorderThickness="0" BorderBrush="Black">
-                                    <TextBox x:Name="EditValueBox" Name="EditValueBox" VerticalAlignment="Center" HorizontalContentAlignment="Center" Text="0" />
-                                </Border>
-                                <Button Name="ButtonPlusOne" Tag="Modify">+1</Button>
-                                <Button Name="ButtonPlusTwo" Tag="Modify">+2</Button>
-                                <Button Name="ButtonPlusThree" Tag="Modify">+3</Button>
-                            </StackPanel>
-                        </Grid>
-                        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Spacing="10">
+                <c:ConfigEnclosureControl Title="{TemplateBinding Title}">
+                    <c:ConfigEnclosureControl.Value>
+                        <Label Grid.Column="1" Content="{TemplateBinding CurrentValue}" />
+                    </c:ConfigEnclosureControl.Value>
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button Name="ButtonSubOne" Tag="Modify">-1</Button>
+                            <Border BorderThickness="0" BorderBrush="Black">
+                                <TextBox x:Name="EditValueBox" Name="EditValueBox" VerticalAlignment="Center" HorizontalContentAlignment="Center" Text="0" />
+                            </Border>
+                            <Button Name="ButtonPlusOne" Tag="Modify">+1</Button>
+                            <Button Name="ButtonPlusTwo" Tag="Modify">+2</Button>
+                            <Button Name="ButtonPlusThree" Tag="Modify">+3</Button>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Spacing="10">
                             <Button Content="Undo" HorizontalAlignment="Center"
                                     Command="{Binding RevertClickFunction, RelativeSource={RelativeSource TemplatedParent}}" />
                             <Button Content="Commit" HorizontalAlignment="Center" Name="CommitButton" x:Name="CommitButton" 
                                     Command="{Binding OnCommitButtonClicked, RelativeSource={RelativeSource TemplatedParent}}"
                                     CommandParameter="{Binding #EditValueBox.Text}"/>
                         </StackPanel>
-                    </Grid>
-                </Border>
+                    </StackPanel>
+                </c:ConfigEnclosureControl>
             </ControlTemplate>
         </Setter>
     </Style>
@@ -59,30 +56,25 @@
         
         <Setter Property="Template">
             <ControlTemplate>
-                <Border BorderBrush="Black" BorderThickness="2" CornerRadius="5">
-                    <Grid Margin="5" RowDefinitions="*, Auto">
-                        <Grid Grid.Row="0" RowDefinitions="*, Auto">
-                            <Grid Grid.Row="0" ColumnDefinitions="*, Auto">
-                                <Label Grid.Column="0" Content="{TemplateBinding Title}" />
-                                <Label Grid.Column="1" Content="{TemplateBinding CurrentValue}" />
-                            </Grid>
-                            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Button Name="ButtonSubOne" Tag="Modify">-1</Button>
-                                <Border BorderThickness="0" BorderBrush="Black">
-                                    <TextBox Name="EditValueBox" x:Name="EditValueBox" VerticalAlignment="Center" HorizontalContentAlignment="Center" Text="0" />
-                                </Border>
-                                <Button Name="ButtonPlusOne" Tag="Modify">+1</Button>
-                                <!-- <Button Name="ButtonPlusTwo" Tag="Modify">+2</Button> -->
-                                <!-- <Button Name="ButtonPlusThree" Tag="Modify">+3</Button> -->
-                            </StackPanel>
-                        </Grid>
-                        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Spacing="10">
+                <c:ConfigEnclosureControl Title="{TemplateBinding Title}">
+                    <c:ConfigEnclosureControl.Value>
+                        <Label Content="{TemplateBinding CurrentValue}" />
+                    </c:ConfigEnclosureControl.Value>
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button Name="ButtonSubOne" Tag="Modify">-1</Button>
+                            <Border BorderThickness="0" BorderBrush="Black">
+                                <TextBox Name="EditValueBox" x:Name="EditValueBox" VerticalAlignment="Center" HorizontalContentAlignment="Center" Text="0" />
+                            </Border>
+                            <Button Name="ButtonPlusOne" Tag="Modify">+1</Button>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Spacing="10">
                             <Button Content="Commit" HorizontalAlignment="Center" Name="CommitButton" x:Name="CommitButton" 
                                     Command="{Binding OnCommitButtonClicked, RelativeSource={RelativeSource TemplatedParent}}"
                                     CommandParameter="{Binding #EditValueBox.Text}"/>
                         </StackPanel>
-                    </Grid>
-                </Border>
+                    </StackPanel>
+                </c:ConfigEnclosureControl>
             </ControlTemplate>
         </Setter>
     </Style>

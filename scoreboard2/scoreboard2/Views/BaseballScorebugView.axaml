@@ -10,17 +10,17 @@
     
     
     
-    <Grid Margin="5" ColumnDefinitions="*, *" RowDefinitions="Auto, Auto, Auto">
+    <Grid Margin="5" ColumnDefinitions="*, *" RowDefinitions="Auto, Auto, Auto, Auto">
         
-        <c:QuickNumberControl Grid.Column="0" Grid.Row="0" Title="{Binding HomeTitleProperty}" 
-                              CommitClickFunction="{Binding HomeCommit}"
-                              CurrentValue="{Binding HomeScore}" />
-        <c:QuickNumberControl Grid.Column="1" Grid.Row="0" Title="{Binding AwayTitleProperty}" 
-                              CommitClickFunction="{Binding AwayCommit}"
-                              CurrentValue="{Binding AwayScore}" />
-        <c:QuickNumberControl Classes="period" Grid.Column="0" Grid.Row="1" Title="{Binding PeriodTitleProperty}"
-                              CommitClickFunction="{Binding PeriodCommit}"
-                              CurrentValue="{Binding Period}" />
+        <c:ScoreControl Grid.Column="0" Grid.Row="0" Score="{Binding Game.HomeScore, Mode=TwoWay}"/>
+        <c:ScoreControl Grid.Column="1" Grid.Row="0" Score="{Binding Game.AwayScore, Mode=TwoWay}" />
+        <c:InningControl Grid.Column="0" Grid.Row="1" Inning="{Binding Game.Period, Mode=TwoWay}"/>
+        <c:BasePickerControl Grid.Column="1" Grid.Row="1" Base="{Binding Game.Base, Mode=TwoWay}" />
+        <StackPanel Grid.Column="0" Grid.Row="2" Grid.RowSpan="2">
+            <c:WrapAroundClickerControl Value="{Binding Game.Outs}" Max="3" />
+            <c:WrapAroundClickerControl Value="{Binding Game.Balls}" Max="3" />
+            <c:WrapAroundClickerControl Value="{Binding Game.Strikes}" Max="2" />
+        </StackPanel>
         
     </Grid>
     

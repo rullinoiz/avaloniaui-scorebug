@@ -12,20 +12,30 @@
     </Application.DataTemplates>
 
     <Application.Styles>
-        <SimpleTheme />
+        <FluentTheme />
         <StyleInclude Source="avares://Avalonia.Controls.ColorPicker/Themes/Fluent/Fluent.xaml" />
         
-        <StyleInclude Source="avares://scoreboard2/Controls/ScoreButtonsControl.axaml" />
-        <StyleInclude Source="avares://scoreboard2/Controls/PeriodButtonsControl.axaml" />
         <StyleInclude Source="avares://scoreboard2/Controls/PeriodControl.axaml" />
+        <StyleInclude Source="avares://scoreboard2/Controls/InningControl.axaml" />
+        <StyleInclude Source="avares://scoreboard2/Controls/ScoreControl.axaml" />
+        <StyleInclude Source="avares://scoreboard2/Controls/BasePickerControl.axaml" />
+        <StyleInclude Source="avares://scoreboard2/Controls/WrapAroundClickerControl.axaml" />
+        
         <StyleInclude Source="avares://scoreboard2/Controls/QuickNumberControl.axaml" />
         <StyleInclude Source="avares://scoreboard2/Controls/QuickImageControl.axaml" />
         <StyleInclude Source="avares://scoreboard2/Controls/QuickColorControl.axaml" />
         <StyleInclude Source="avares://scoreboard2/Controls/ConfigEnclosureControl.axaml" />
         <StyleInclude Source="avares://scoreboard2/Controls/Scoreboard/ScoreDisplayLogoBig.axaml" />
+        <StyleInclude Source="avares://scoreboard2/Controls/Scoreboard/InningDisplayBig.axaml" />
+        <StyleInclude Source="avares://scoreboard2/Controls/Scoreboard/BaseDisplayBig.axaml" />
+        <StyleInclude Source="avares://scoreboard2/Controls/Scoreboard/DotValueDisplaySmall.axaml" />
+
+
+
     </Application.Styles>
              
     <Application.Resources>
         <FontFamily x:Key="RubikFont">avares://scoreboard2/Common/Assets/Fonts#Rubik</FontFamily>
+        <FontFamily x:Key="InterFont">avares://scoreboard2/Common/Assets/Fonts#Inter</FontFamily>
     </Application.Resources>
 </Application>

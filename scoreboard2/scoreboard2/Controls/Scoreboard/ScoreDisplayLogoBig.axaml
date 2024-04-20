@@ -3,7 +3,7 @@
         xmlns:converters="using:scoreboard2.Converters"
         xmlns:controls="using:scoreboard2.Controls.Scoreboard">
     <Design.PreviewWith>
-        <Border Width="100" Height="125">
+        <Border Width="80" Height="100">
             <controls:ScoreDisplayLogoBig />
         </Border>
     </Design.PreviewWith>
@@ -12,10 +12,10 @@
         <!-- Set Defaults -->
         <Setter Property="Template">
             <ControlTemplate>
-                <StackPanel Name="PART_StackPanel" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+                <StackPanel Name="PART_StackPanel" HorizontalAlignment="Center" Orientation="Vertical" Spacing="-10">
                     <Label Name="PART_Label" 
                            Foreground="{TemplateBinding FontColor, Converter={x:Static converters:AvaloniaStaticConverters.ColorToBrushConverter}}" 
-                           FontSize="50" FontFamily="{StaticResource RubikFont}" 
+                           FontSize="50" FontFamily="{StaticResource RubikFont}"
                            HorizontalContentAlignment="Center" Content="{TemplateBinding Value}" />
                     <Image Name="PART_Image" Width="50" Height="50" Source="{TemplateBinding Image}" />
                 </StackPanel>
