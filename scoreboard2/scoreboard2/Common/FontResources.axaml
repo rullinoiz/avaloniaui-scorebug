@@ -1,0 +1,5 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <FontFamily x:Key="RubikFont">avares://scoreboard2/Common/Assets/Fonts#Rubik</FontFamily>
+    <FontFamily x:Key="InterFont">avares://scoreboard2/Common/Assets/Fonts#Inter</FontFamily>
+</ResourceDictionary>

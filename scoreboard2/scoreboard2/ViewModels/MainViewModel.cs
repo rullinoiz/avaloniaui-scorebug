@@ -8,7 +8,7 @@ namespace scoreboard2.ViewModels;
 
 public class MainViewModel : ViewModelBase
 {
-    public Game Game { get; } = new();
+    public BaseballGame Game { get; } = new();
 
     public MainViewModel()
     {

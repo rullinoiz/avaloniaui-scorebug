@@ -1,6 +1,7 @@
 using Avalonia;
 using scoreboard2.Controls.Common;
 using scoreboard2.Models;
+using scoreboard2.Models.Common;
 
 namespace scoreboard2.Controls;
 

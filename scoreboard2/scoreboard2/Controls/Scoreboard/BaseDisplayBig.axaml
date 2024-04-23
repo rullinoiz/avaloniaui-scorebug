@@ -5,8 +5,16 @@
         <c:BaseDisplayBig />
     </Design.PreviewWith>
     
+    <Styles.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceInclude Source="avares://scoreboard2/Controls/Common/Resources.axaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Styles.Resources>
+    
     <Style Selector="c|BaseDisplayBig /template/ :is(Rectangle)">
-        <Setter Property="Fill" Value="#ff442d0a" />
+        <Setter Property="Fill" Value="{StaticResource OffColorBrush}" />
         <Setter Property="Width" Value="30" />
         <Setter Property="Height" Value="30" />
         <!-- <Setter Property="Stroke" Value="Gray" /> -->

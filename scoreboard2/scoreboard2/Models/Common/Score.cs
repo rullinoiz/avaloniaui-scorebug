@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using scoreboard2.Models.Common;
+using scoreboard2.Models.Common.Interface;
 
-namespace scoreboard2.Models;
+namespace scoreboard2.Models.Common;
 
 public class Score(string name) : NamedValue(name), IUndoable
 {
@@ -9,8 +9,7 @@ public class Score(string name) : NamedValue(name), IUndoable
 
     public int Undo()
     {
-        if (!_previousValues.TryPop(out var v)) return 0;
-        return Value = v;
+        return !_previousValues.TryPop(out var v) ? 0 : v;
     }
 
     public void Commit(int v)

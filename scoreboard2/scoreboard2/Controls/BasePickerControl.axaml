@@ -6,13 +6,22 @@
     </Design.PreviewWith>
     
     <Style Selector="c|BasePickerControl /template/ :is(Button)">
-        <Setter Property="Background" Value="#ff442d0a" />
+        <Setter Property="Background" Value="{StaticResource OffColorBrush}" />
         <Setter Property="Width" Value="20" />
         <Setter Property="Height" Value="20" />
         <Setter Property="Command" 
-                Value="{Binding ButtonClickFunction, RelativeSource={RelativeSource TemplatedParent}}" />
+                Value="{Binding Base.ToggleKey, 
+                RelativeSource={RelativeSource TemplatedParent}}" />
         <Setter Property="CommandParameter" Value="{Binding $self.Name}" />
     </Style>
+    
+    <Styles.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceInclude Source="Common/Resources.axaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Styles.Resources>
 
     <Style Selector="c|BasePickerControl">
         <!-- Set Defaults -->

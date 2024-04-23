@@ -2,6 +2,8 @@ using System;
 using System.ComponentModel;
 using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
+using scoreboard2.Models.Common;
+using scoreboard2.Models.Common.Interface;
 
 namespace scoreboard2.Models.Baseball;
 
@@ -29,7 +31,7 @@ public class InningType(int value)
     public static bool operator !=(InningType a, InningType b) => a.Value != b.Value;
 }
 
-public class Inning : ObservableObject
+public class Inning : ObservableObject, IPeriod
 {
     private static readonly string[] Suffixes = ["ST", "ND", "RD", "TH"];
 
@@ -45,7 +47,6 @@ public class Inning : ObservableObject
     public InningType TopOrBottom => Value % 2;
     
     // override Value so InningNum is also updated
-#pragma warning disable MVVMTK0034
     public int Value
     {
         get => _value;
@@ -59,7 +60,7 @@ public class Inning : ObservableObject
             OnPropertyChanged(nameof(TopOrBottom));
         }
     }
-#pragma warning restore MVVMTK0034
+    
     public string GetSuffix()
     {
         var i = InningNum;

@@ -15,6 +15,17 @@ public partial class Base : ObservableObject
         OnPropertyChanged();
     }
 
+    public void ToggleKey(string b)
+    {
+        Toggle(b switch
+        {
+            "Base1" => 0,
+            "Base2" => 1,
+            "Base3" => 2,
+            _ => 0
+        });
+    }
+
     public Base()
     {
         BaseStates = [false, false, false];

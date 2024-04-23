@@ -5,10 +5,17 @@
         <c:DotValueDisplaySmall Max="3" />
     </Design.PreviewWith>
     
+    <Styles.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceInclude Source="avares://scoreboard2/Controls/Common/Resources.axaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Styles.Resources>
+    
     <Style Selector="c|DotValueDisplaySmall /template/ :is(Ellipse)">
         <Setter Property="Width" Value="15" />
         <Setter Property="Height" Value="15" />
-        <Setter Property="Fill" Value="Black" />
     </Style>
 
     <Style Selector="c|DotValueDisplaySmall">
@@ -16,7 +23,7 @@
         <Setter Property="Template">
             <ControlTemplate>
                 <StackPanel Name="StackPanel" Orientation="Horizontal" Spacing="5" Margin="3">
-
+                    <!-- this will be populated by code -->
                 </StackPanel>
             </ControlTemplate>
         </Setter>

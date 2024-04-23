@@ -1,10 +1,9 @@
-using System.Collections.Generic;
-using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Controls.Shapes;
 using Avalonia.Media;
+using scoreboard2.Common;
 
 namespace scoreboard2.Controls.Scoreboard;
 
@@ -27,12 +26,12 @@ public class DotValueDisplaySmall : TemplatedControl
         get => GetValue(ValueProperty);
         set => SetValue(ValueProperty, value);
     }
-    
-    private static readonly IBrush OnColor = new SolidColorBrush(0xffffa709);
-    private static readonly IBrush OffColor = new SolidColorBrush(0xff442d0a);
+
+    private static readonly IBrush? OnColor = Helper.GetResource<IBrush>("OnColorBrush");
+    private static readonly IBrush? OffColor = Helper.GetResource<IBrush>("OffColorBrush");
 
     private StackPanel? _panel;
-
+    
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);
@@ -44,9 +43,9 @@ public class DotValueDisplaySmall : TemplatedControl
             {
                 Fill = OffColor, 
                 Width = 15, 
-                Height = 15, 
-                Stroke = new SolidColorBrush(0x0f0f0f), 
-                StrokeThickness = 2
+                Height = 15
+                // Stroke = Resources["OnColorBrush"] as SolidColorBrush, 
+                // StrokeThickness = 2
             });
         }
 

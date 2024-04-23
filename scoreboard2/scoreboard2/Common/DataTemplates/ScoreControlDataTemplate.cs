@@ -2,6 +2,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 using scoreboard2.Controls;
 using scoreboard2.Models;
+using scoreboard2.Models.Common;
 
 namespace scoreboard2.Common.DataTemplates;
 

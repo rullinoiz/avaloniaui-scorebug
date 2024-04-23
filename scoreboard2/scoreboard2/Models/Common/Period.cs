@@ -1,6 +1,4 @@
-using scoreboard2.Models.Common;
-
-namespace scoreboard2.Models;
+namespace scoreboard2.Models.Common;
 
 public class Period() : NamedValue("PERIOD")
 {

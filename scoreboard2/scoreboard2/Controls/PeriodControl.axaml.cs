@@ -3,6 +3,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using scoreboard2.Models;
+using scoreboard2.Models.Common;
 
 namespace scoreboard2.Controls;
 

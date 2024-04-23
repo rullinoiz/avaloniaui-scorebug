@@ -6,6 +6,14 @@
             <controls:InningDisplayBig />
         </Border>
     </Design.PreviewWith>
+    
+    <Styles.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceInclude Source="/Controls/Common/Resources.axaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Styles.Resources>
 
     <Style Selector="controls|InningDisplayBig">
         <!-- Set Defaults -->
@@ -13,7 +21,11 @@
             <ControlTemplate>
                 <Grid RowDefinitions="*, Auto, *" Margin="10">
                     <Image Grid.Row="0" Name="TopArrow" Width="30" />
-                    <Label Grid.Row="1" HorizontalAlignment="Center" FontSize="30" Foreground="#ffa709" FontFamily="{StaticResource InterFont}" Content="{Binding Inning.InningNum, RelativeSource={RelativeSource TemplatedParent}}" />
+                    <Label Grid.Row="1" HorizontalAlignment="Center" FontSize="30" 
+                           Foreground="{StaticResource OnColorBrush}" 
+                           FontFamily="{StaticResource InterFont}" 
+                           Content="{Binding Inning.InningNum, 
+                           RelativeSource={RelativeSource TemplatedParent}}" />
                     <Image Grid.Row="2" Name="BottomArrow" Width="30" RenderTransform="scaleY(-1)" />
                 </Grid>
             </ControlTemplate>

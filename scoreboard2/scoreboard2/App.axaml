@@ -29,13 +29,14 @@
         <StyleInclude Source="avares://scoreboard2/Controls/Scoreboard/InningDisplayBig.axaml" />
         <StyleInclude Source="avares://scoreboard2/Controls/Scoreboard/BaseDisplayBig.axaml" />
         <StyleInclude Source="avares://scoreboard2/Controls/Scoreboard/DotValueDisplaySmall.axaml" />
-
-
-
     </Application.Styles>
              
     <Application.Resources>
-        <FontFamily x:Key="RubikFont">avares://scoreboard2/Common/Assets/Fonts#Rubik</FontFamily>
-        <FontFamily x:Key="InterFont">avares://scoreboard2/Common/Assets/Fonts#Inter</FontFamily>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceInclude Source="avares://scoreboard2/Common/FontResources.axaml" />
+                <ResourceInclude Source="avares://scoreboard2/Controls/Common/Resources.axaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
