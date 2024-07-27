@@ -5,6 +5,8 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace scoreboard2.Models.Baseball;
 
+#pragma warning disable CS0660
+#pragma warning disable CS0661
 public class InningType(int value)
 {
     private const int BottomValue = 0;
@@ -36,6 +38,7 @@ public class Inning : ObservableObject
     private int _inningNum;
     private int _value;
     
+    // ReSharper disable once UnusedAutoPropertyAccessor.Global
     public string Name { get; }
 
     public int InningNum => _inningNum;

@@ -3,7 +3,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:scoreboard2.ViewModels"
-             xmlns:c="clr-namespace:scoreboard2.Controls"
              xmlns:views="using:scoreboard2.Views"
              mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="250"
              x:Class="scoreboard2.Views.MainView"

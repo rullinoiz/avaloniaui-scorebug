@@ -7,13 +7,13 @@ namespace scoreboard2.Common.DataTemplates;
 
 public class ScoreControlDataTemplate : IDataTemplate
 {
-    public Control Build(object param)
+    public Control Build(object? param)
     {
-        var s = (Score)param;
-        return new QuickNumberControl() { Title = s.Name, CurrentValue = s.Value, CommitClickFunction = s.Commit };
+        var s = (Score)param!;
+        return new QuickNumberControl { Title = s.Name, CurrentValue = s.Value, CommitClickFunction = s.Commit };
     }
 
-    public bool Match(object param)
+    public bool Match(object? param)
     {
         return param is Score;
     }

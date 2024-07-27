@@ -1,7 +1,7 @@
 using System;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
-using scoreboard2.ViewModels;
+using scoreboard2.ViewModels.Common;
 
 namespace scoreboard2;
 
@@ -25,7 +25,6 @@ public class ViewLocator : IDataTemplate
 
     public bool Match(object? data)
     {
-        return false;
-        // return data is ViewModelBase;
+        return data is ViewModelBase;
     }
 }

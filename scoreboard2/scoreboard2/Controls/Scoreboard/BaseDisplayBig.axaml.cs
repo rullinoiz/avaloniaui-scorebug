@@ -1,4 +1,3 @@
-using System;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
@@ -35,7 +34,7 @@ public class BaseDisplayBig : TemplatedControl
         _base2 = e.NameScope.Find<Rectangle>(name: "Base2");
         _base3 = e.NameScope.Find<Rectangle>(name: "Base3");
 
-        Base.PropertyChanged += (_, args) =>
+        Base.PropertyChanged += (_, _) =>
         {
             // if (args.PropertyName != nameof(Base.BaseStates)) return;
 

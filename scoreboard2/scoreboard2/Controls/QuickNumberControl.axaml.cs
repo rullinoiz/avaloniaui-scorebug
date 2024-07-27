@@ -9,8 +9,8 @@ namespace scoreboard2.Controls;
 public class QuickNumberControl : TemplatedControl
 {
     #region boilerplate
-    public static readonly StyledProperty<string> TitleProperty = AvaloniaProperty.Register<QuickNumberControl, string>(
-        "Title", "HOME");
+    public static readonly StyledProperty<string> TitleProperty = 
+        AvaloniaProperty.Register<QuickNumberControl, string>("Title", "HOME");
 
     public string Title
     {
@@ -18,8 +18,8 @@ public class QuickNumberControl : TemplatedControl
         set => SetValue(TitleProperty, value);
     }
 
-    public static readonly StyledProperty<int> CurrentValueProperty = AvaloniaProperty.Register<QuickNumberControl, int>(
-        "CurrentValue", 0);
+    public static readonly StyledProperty<int> CurrentValueProperty = 
+        AvaloniaProperty.Register<QuickNumberControl, int>("CurrentValue");
 
     public int CurrentValue
     {
@@ -27,13 +27,13 @@ public class QuickNumberControl : TemplatedControl
         set => SetValue(CurrentValueProperty, value);
     }
 
-    public static readonly StyledProperty<Action<int>> CommitClickFunctionProperty = AvaloniaProperty.Register<QuickNumberControl, Action<int>>(
-        "CommitClickFunction");
+    public static readonly StyledProperty<Action<int>> CommitClickFunctionProperty 
+        = AvaloniaProperty.Register<QuickNumberControl, Action<int>>("CommitClickFunction");
 
     public Action<int> CommitClickFunction
     {
         get => GetValue(CommitClickFunctionProperty);
-        set => SetValue(CommitClickFunctionProperty, value);
+        init => SetValue(CommitClickFunctionProperty, value);
     }
     #endregion
 
@@ -41,7 +41,7 @@ public class QuickNumberControl : TemplatedControl
     {
         _previousValues.Push(CurrentValue);
         Console.WriteLine(value + " " + CurrentValue);
-        CommitClickFunction?.Invoke(value);
+        CommitClickFunction.Invoke(value);
     }
 
     private readonly Stack<int> _previousValues = new();
@@ -54,11 +54,9 @@ public class QuickNumberControl : TemplatedControl
     
     public void RevertClickFunction()
     {
-        if (_previousValues.TryPop(out var t))
-        {
-            Console.WriteLine("undo " + t);
-            _editValue!.Text = t.ToString();
-        }
+        if (!_previousValues.TryPop(out var t)) return;
+        Console.WriteLine("undo " + t);
+        _editValue!.Text = t.ToString();
     }
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)

@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
@@ -10,8 +8,8 @@ namespace scoreboard2.Controls.Scoreboard;
 
 public class DotValueDisplaySmall : TemplatedControl
 {
-    public static readonly StyledProperty<int> MaxProperty = AvaloniaProperty.Register<DotValueDisplaySmall, int>(
-        "Max");
+    public static readonly StyledProperty<int> MaxProperty = 
+        AvaloniaProperty.Register<DotValueDisplaySmall, int>("Max");
 
     public int Max
     {
@@ -19,8 +17,8 @@ public class DotValueDisplaySmall : TemplatedControl
         set => SetValue(MaxProperty, value);
     }
 
-    public static readonly StyledProperty<int> ValueProperty = AvaloniaProperty.Register<DotValueDisplaySmall, int>(
-        "Value");
+    public static readonly StyledProperty<int> ValueProperty = 
+        AvaloniaProperty.Register<DotValueDisplaySmall, int>("Value");
 
     public int Value
     {
