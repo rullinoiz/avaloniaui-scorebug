@@ -1,0 +1,58 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:scoreboard2.ViewModels"
+             xmlns:c="using:scoreboard2.Controls.Scoreboard"
+             xmlns:converters="using:scoreboard2.Converters"
+             mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="75"
+             x:Class="scoreboard2.Views.Football.FootballScorebugView"
+             x:DataType="vm:MainViewModel"
+             xmlns:football="using:scoreboard2.Controls.Scoreboard.Football">
+    
+    <Grid ColumnDefinitions="375, 375, *, 2*" ShowGridLines="False">
+        
+        <!-- scores -->
+        <Border Grid.Column="0" Background="{Binding BaseGame.Settings.HomeBackgroundColor, 
+                                Converter={x:Static converters:AvaloniaStaticConverters.ColorToBrushConverter}}">
+            <football:LogoNameScoreTimeoutDisplayLandscape  
+                Image="{Binding BaseGame.Settings.HomeImage}" 
+                CityName="{Binding BaseGame.Settings.HomeCityName}" 
+                TeamName="{Binding BaseGame.Settings.HomeTeamName}" 
+                FontColor="{Binding BaseGame.Settings.HomeForegroundColor}"
+                Score="{Binding BaseGame.HomeScore.Value}" 
+                Timeouts="{Binding Football.HomeTimeouts.Value}"
+                HasBall="{Binding !Football.HomeDefending}" />
+        </Border>
+        <Border Grid.Column="1" Background="{Binding BaseGame.Settings.AwayBackgroundColor, 
+                                Converter={x:Static converters:AvaloniaStaticConverters.ColorToBrushConverter}}">
+            <football:LogoNameScoreTimeoutDisplayLandscape
+                Image="{Binding BaseGame.Settings.AwayImage}" 
+                CityName="{Binding BaseGame.Settings.AwayCityName}" 
+                TeamName="{Binding BaseGame.Settings.AwayTeamName}"
+                FontColor="{Binding BaseGame.Settings.AwayForegroundColor}"
+                Score="{Binding BaseGame.AwayScore.Value}" 
+                Timeouts="{Binding Football.AwayTimeouts.Value}" 
+                HasBall="{Binding Football.HomeDefending}" />
+        </Border>
+        
+        <!-- quarter -->
+        <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" 
+                   FontSize="20" FontFamily="{StaticResource InterFont}" FontWeight="ExtraBold"
+                   Text="{Binding BaseGame.Period.PeriodString}" />
+        
+        <!-- down & left 2 go -->
+        <TextBlock Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" 
+                   FontSize="20" FontFamily="{StaticResource InterFont}" FontWeight="ExtraBold">
+            <TextBlock.Text>
+                <MultiBinding StringFormat="{}{0} {1} {2}">
+                    <Binding Path="Football.Down.Value" 
+                             Converter="{x:Static converters:StringTercer.Instance}" />
+                    <Binding Path="Ampersand" />
+                    <Binding Path="Football.Yards.Value" />
+                </MultiBinding>
+            </TextBlock.Text>
+        </TextBlock>
+    </Grid>
+    
+</UserControl>

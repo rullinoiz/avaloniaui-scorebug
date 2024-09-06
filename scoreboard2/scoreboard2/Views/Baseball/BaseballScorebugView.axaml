@@ -5,9 +5,10 @@
              xmlns:vm="using:scoreboard2.ViewModels"
              xmlns:c="using:scoreboard2.Controls.Scoreboard"
              xmlns:converters="using:scoreboard2.Converters"
+             xmlns:baseball="clr-namespace:scoreboard2.Controls.Scoreboard.Baseball"
              mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="125"
              x:DataType="vm:MainViewModel"
-             x:Class="scoreboard2.Views.ScoreboardView">
+             x:Class="scoreboard2.Views.Baseball.BaseballScorebugView">
     
     <UserControl.Styles>
         <Style Selector=":is(Label)">
@@ -17,37 +18,37 @@
     </UserControl.Styles>
     
     <Grid ColumnDefinitions="*, 300, *" ShowGridLines="False">
-        <Border Grid.Column="0" Background="{Binding Game.Settings.HomeBackgroundColor, Converter={x:Static converters:AvaloniaStaticConverters.ColorToBrushConverter}}">
-            <c:ScoreDisplayLogoBig Value="{Binding Game.HomeScore.Value}" 
-                                   Image="{Binding Game.Settings.HomeImage}" 
-                                   FontColor="{Binding Game.Settings.HomeForegroundColor}" />
+        <Border Grid.Column="0" Background="{Binding BaseGame.Settings.HomeBackgroundColor, Converter={x:Static converters:AvaloniaStaticConverters.ColorToBrushConverter}}">
+            <c:ScoreDisplayLogoBig Value="{Binding BaseGame.HomeScore.Value}" 
+                                   Image="{Binding BaseGame.Settings.HomeImage}" 
+                                   FontColor="{Binding BaseGame.Settings.HomeForegroundColor}" />
         </Border>
         <Grid ColumnDefinitions="*, 125, *" Grid.Column="1" VerticalAlignment="Center" Background="Black">
             <Border Grid.Column="0">
-                <c:InningDisplayBig Inning="{Binding Game.Period}" />
+                <baseball:InningDisplayBig Inning="{Binding BaseGame.Period}" />
             </Border>
             <Border Grid.Column="1">
                 <StackPanel HorizontalAlignment="Center" Spacing="-20">
-                    <c:BaseDisplayBig Base="{Binding Game.Base}" />
-                    <c:DotValueDisplaySmall HorizontalAlignment="Center" Max="3" Value="{Binding Game.Outs.Value}" />
+                    <baseball:BaseDisplayBig Base="{Binding Baseball.Base}" />
+                    <c:DotValueDisplaySmall HorizontalAlignment="Center" Max="3" Value="{Binding Baseball.Outs.Value}" />
                 </StackPanel>
             </Border>
             
             <StackPanel Grid.Column="2" VerticalAlignment="Center" Spacing="15">
                 <StackPanel Orientation="Horizontal">
                     <Label HorizontalAlignment="Left">B</Label>
-                    <c:DotValueDisplaySmall Max="3" Value="{Binding Game.Balls.Value}" />
+                    <c:DotValueDisplaySmall Max="3" Value="{Binding Baseball.Balls.Value}" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label HorizontalAlignment="Left">S</Label>
-                    <c:DotValueDisplaySmall Max="2" Value="{Binding Game.Strikes.Value}" />
+                    <c:DotValueDisplaySmall Max="2" Value="{Binding Baseball.Strikes.Value}" />
                 </StackPanel>
             </StackPanel>
         </Grid>
-        <Border Grid.Column="2" Background="{Binding Game.Settings.AwayBackgroundColor, Converter={x:Static converters:AvaloniaStaticConverters.ColorToBrushConverter}}">
-            <c:ScoreDisplayLogoBig Value="{Binding Game.AwayScore.Value}" 
-                                   Image="{Binding Game.Settings.AwayImage}"
-                                   FontColor="{Binding Game.Settings.AwayForegroundColor}" />
+        <Border Grid.Column="2" Background="{Binding BaseGame.Settings.AwayBackgroundColor, Converter={x:Static converters:AvaloniaStaticConverters.ColorToBrushConverter}}">
+            <c:ScoreDisplayLogoBig Value="{Binding BaseGame.AwayScore.Value}" 
+                                   Image="{Binding BaseGame.Settings.AwayImage}"
+                                   FontColor="{Binding BaseGame.Settings.AwayForegroundColor}" />
         </Border>
     </Grid>
     

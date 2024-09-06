@@ -1,0 +1,29 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:scoreboard2.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:c="clr-namespace:scoreboard2.Controls"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="vm:MainViewModel"
+             x:Class="scoreboard2.Views.Baseball.BaseballConfigView">
+    
+    <StackPanel>
+        <ScrollViewer>
+            <Grid Margin="5" ColumnDefinitions="*, *" RowDefinitions="Auto, Auto, Auto, Auto">
+                <c:ScoreControl Grid.Column="0" Grid.Row="0" Score="{Binding BaseGame.HomeScore, Mode=TwoWay}"/>
+                <c:ScoreControl Grid.Column="1" Grid.Row="0" Score="{Binding BaseGame.AwayScore, Mode=TwoWay}" />
+                <c:InningControl Grid.Column="0" Grid.Row="1" Inning="{Binding BaseGame.Period, Mode=TwoWay}"/>
+                <c:BasePickerControl Grid.Column="1" Grid.Row="1" Base="{Binding Baseball.Base, Mode=TwoWay}" />
+                <StackPanel Grid.Column="0" Grid.Row="2" Grid.RowSpan="2">
+                    <c:WrapAroundClickerControl Value="{Binding  Baseball.Outs}" Max="3" />
+                    <c:WrapAroundClickerControl Value="{Binding Baseball.Balls}" Max="3" />
+                    <c:WrapAroundClickerControl Value="{Binding Baseball.Strikes}" Max="2" />
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+        
+    </StackPanel>
+    
+    
+</UserControl>

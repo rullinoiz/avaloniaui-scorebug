@@ -1,0 +1,38 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:scoreboard2.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:c="using:scoreboard2.Controls"
+             xmlns:fc="using:scoreboard2.Controls.Football"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="vm:MainViewModel"
+             x:Class="scoreboard2.Views.Football.FootballConfigView">
+    
+    <StackPanel>
+        <ScrollViewer>
+            <Grid Margin="5" ColumnDefinitions="*, *" RowDefinitions="Auto, Auto, Auto, Auto, Auto">
+                <c:ScoreControl Grid.Column="0" Grid.Row="0" 
+                                Score="{Binding BaseGame.HomeScore, Mode=TwoWay}"/>
+                <c:ScoreControl Grid.Column="1" Grid.Row="0" 
+                                Score="{Binding BaseGame.AwayScore, Mode=TwoWay}" />
+                <c:WrapAroundClickerControl Grid.Column="0" Grid.Row="1" Max="3"
+                                            Value="{Binding Football.HomeTimeouts, Mode=TwoWay}" />
+                <c:WrapAroundClickerControl Grid.Column="1" Grid.Row="1" Max="3"
+                                            Value="{Binding Football.AwayTimeouts, Mode=TwoWay}" />
+                
+                <StackPanel Grid.Column="0" Grid.Row="2">
+                    <c:ConfigEnclosureControl  Title="HOME ATACKING?">
+                        <c:ConfigEnclosureControl.Value>
+                            <CheckBox IsChecked="{Binding !Football.HomeDefending}" />
+                        </c:ConfigEnclosureControl.Value>
+                    </c:ConfigEnclosureControl>
+                </StackPanel>
+                
+                <c:InningControl Grid.Column="1" Grid.Row="2" Grid.RowSpan="2" Inning="{Binding BaseGame.Period}" />
+                <fc:DownsAndYards2Go Grid.Column="0" Grid.Row="3" Down="{Binding Football.Down}" Yards="{Binding Football.Yards}" />
+            </Grid>
+        </ScrollViewer>
+    </StackPanel>
+    
+</UserControl>

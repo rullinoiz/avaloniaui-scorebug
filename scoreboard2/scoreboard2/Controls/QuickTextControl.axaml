@@ -1,0 +1,20 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:c="using:scoreboard2.Controls">
+    <Design.PreviewWith>
+        <c:QuickTextControl Title="TEXT INPUT" Value="kjfksjdfjksdf" />
+    </Design.PreviewWith>
+
+    <Style Selector="c|QuickTextControl">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <c:ConfigEnclosureControl Title="{TemplateBinding Title}">
+                    <c:ConfigEnclosureControl.Value>
+                        <TextBox Text="{TemplateBinding Value, Mode=TwoWay}" />
+                    </c:ConfigEnclosureControl.Value>
+                </c:ConfigEnclosureControl>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

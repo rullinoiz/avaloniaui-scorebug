@@ -3,37 +3,27 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:scoreboard2.ViewModels"
-             xmlns:views="using:scoreboard2.Views"
+             xmlns:baseball="using:scoreboard2.Views.Baseball"
+             xmlns:football="using:scoreboard2.Views.Football"
              mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="250"
              x:Class="scoreboard2.Views.MainView"
              x:DataType="vm:MainViewModel">
     <Design.DataContext>
     <!-- This only sets the DataContext for the previewer in an IDE,
          to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-    <vm:MainViewModel />
+        <vm:MainViewModel />
     </Design.DataContext>
-
-    <!-- <StackPanel> -->
-    <!--     <Grid Name="HomeGrid" ColumnDefinitions="*, Auto"> -->
-    <!--         <Label Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left">HOME</Label> -->
-    <!--         <controls:ScoreButtonsControl Name="HomeControl" Grid.Column="1" Score="1" /> -->
-    <!--     </Grid> -->
-    <!--     <Grid Name="AwayGrid" ColumnDefinitions="*, Auto"> -->
-    <!--         <Label Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left">AWAY</Label> -->
-    <!--         <controls:ScoreButtonsControl Name="AwayControl" Grid.Column="1" Score="1" /> -->
-    <!--     </Grid> -->
-    <!--     <Grid Name="PeriodGrid" ColumnDefinitions="*, Auto"> -->
-    <!--         <Label Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left">PERIOD</Label> -->
-    <!--         <controls:PeriodButtonsControl Name="PeriodControl" Grid.Column="1" Period="1" /> -->
-    <!--     </Grid> -->
-    <!-- </StackPanel> -->
     
-    <TabControl>
-        <TabItem Header="Config">
-            <views:ScorebugConfigView />
-        </TabItem>
+    <TabControl SelectedIndex="{Binding SelectedGame}">
         <TabItem Header="Baseball">
-            <views:BaseballScorebugView />
+            <ScrollViewer>
+                <baseball:BaseballConfigView />
+            </ScrollViewer>
+        </TabItem>
+        <TabItem Header="Football">
+            <ScrollViewer>
+                <football:FootballConfigView />
+            </ScrollViewer>
         </TabItem>
     </TabControl>
   

@@ -1,0 +1,18 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:scoreboard2.Controls.Scoreboard">
+    <Design.PreviewWith>
+        <controls:BarValueDisplay Width="325" Height="10" Max="4" Value="4" Spacing="6" />
+    </Design.PreviewWith>
+
+    <Style Selector="controls|BarValueDisplay">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <StackPanel x:Name="Container" Spacing="{TemplateBinding Spacing}" Orientation="Horizontal" HorizontalAlignment="Left">
+                    
+                </StackPanel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

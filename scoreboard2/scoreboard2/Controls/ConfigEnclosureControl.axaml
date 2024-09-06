@@ -13,7 +13,7 @@
                     <Grid Margin="5" RowDefinitions="*, Auto">
                         <Grid Grid.Row="0" RowDefinitions="*, Auto">
                             <Grid Grid.Row="0" ColumnDefinitions="*, Auto">
-                                <Label Grid.Column="0" Content="{TemplateBinding Title}" />
+                                <TextBlock Grid.Column="0" Text="{TemplateBinding Title}" VerticalAlignment="Center" />
                                 <ContentPresenter Grid.Column="1" Content="{TemplateBinding Value, Mode=TwoWay}" />
                             </Grid>
                             <ContentPresenter Grid.Row="1" Content="{TemplateBinding Content}" />

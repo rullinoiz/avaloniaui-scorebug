@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace scoreboard2.Models.Baseball;
+namespace scoreboard2.Models;
 
 #pragma warning disable CS0660
 #pragma warning disable CS0661
@@ -33,7 +33,7 @@ public class InningType(int value)
 
 public class Inning : ObservableObject
 {
-    private static readonly string[] Suffixes = ["ST", "ND", "RD", "TH"];
+    private static readonly string[] Suffixes = ["st", "nd", "rd", "th"];
 
     private int _inningNum;
     private int _value;
@@ -44,6 +44,8 @@ public class Inning : ObservableObject
     public int InningNum => _inningNum;
     
     public string InningString => $"{InningNum}{GetSuffix()}";
+
+    public string PeriodString => $"{Value}{Suffixes.GetValue(_value - 1) ?? Suffixes.Last()}";
 
     public InningType TopOrBottom => Value % 2;
     
@@ -58,15 +60,17 @@ public class Inning : ObservableObject
             SetProperty(ref _inningNum, (value - 1) / 2 + 1, nameof(InningNum));
             OnPropertyChanging(nameof(InningString));
             OnPropertyChanged(nameof(InningString));
+            OnPropertyChanging(nameof(PeriodString));
+            OnPropertyChanged(nameof(PeriodString));
             OnPropertyChanging(nameof(TopOrBottom));
             OnPropertyChanged(nameof(TopOrBottom));
         }
     }
 #pragma warning restore MVVMTK0034
-    public string GetSuffix()
+    public string GetSuffix(int? i = null)
     {
-        var i = InningNum;
-        return i - 1 >= Suffixes.Length ? Suffixes.Last() : Suffixes[i - 1];
+        i ??= InningNum;
+        return i - 1 >= Suffixes.Length ? Suffixes.Last() : Suffixes[i.Value - 1];
     }
     
     public Tuple<InningType, int> GetInning() => new(Value % 2, InningNum);

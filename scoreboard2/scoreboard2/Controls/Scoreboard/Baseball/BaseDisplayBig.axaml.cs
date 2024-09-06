@@ -5,7 +5,7 @@ using Avalonia.Controls.Shapes;
 using Avalonia.Media;
 using scoreboard2.Models.Baseball;
 
-namespace scoreboard2.Controls.Scoreboard;
+namespace scoreboard2.Controls.Scoreboard.Baseball;
 
 public class BaseDisplayBig : TemplatedControl
 {

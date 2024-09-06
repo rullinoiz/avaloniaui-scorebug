@@ -1,6 +1,6 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:controls="using:scoreboard2.Controls.Scoreboard">
+        xmlns:controls="using:scoreboard2.Controls.Scoreboard.Baseball">
     <Design.PreviewWith>
         <Border Width="100" Height="125">
             <controls:InningDisplayBig />

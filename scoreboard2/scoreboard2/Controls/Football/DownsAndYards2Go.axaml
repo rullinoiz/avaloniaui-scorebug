@@ -1,0 +1,51 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:scoreboard2.Controls"
+        xmlns:football="using:scoreboard2.Controls.Football">
+    
+    <Design.PreviewWith>
+        <Border BorderBrush="White" BorderThickness="1" Width="400" Height="200">
+            <football:DownsAndYards2Go Down="1" Yards="10" />
+        </Border>
+    </Design.PreviewWith>
+    
+    <Style Selector="football|DownsAndYards2Go /template/ :is(StackPanel)[Name=DownStackPanel] > Button">
+        <Setter Property="Command" 
+                Value="{Binding DownModify, RelativeSource={RelativeSource TemplatedParent}}" />
+        <Setter Property="CommandParameter" Value="{Binding $self.Tag}" />
+    </Style>
+    
+    <Style Selector="football|DownsAndYards2Go /template/ :is(Button)[Name=Reset]">
+        <Setter Property="Command" 
+                Value="{Binding Reset, RelativeSource={RelativeSource TemplatedParent}}" />
+    </Style>
+
+    <Style Selector="football|DownsAndYards2Go">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <controls:ConfigEnclosureControl Title="DOWNS N' YARDS">
+                    <controls:ConfigEnclosureControl.Value>
+                        <TextBlock Text="{TemplateBinding Output}" />
+                    </controls:ConfigEnclosureControl.Value>
+                    
+                    <Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto, Auto" VerticalAlignment="Top">
+                        <Label Grid.Column="0" Grid.Row="0" Content="DOWN" />
+                        <StackPanel x:Name="DownStackPanel" Grid.Column="1" Grid.Row="0" Orientation="Horizontal" Spacing="5">
+                            <Button x:Name="Reset" Content="Reset" />
+                            <Button Tag="-1" Content="-" />
+                            <Label Content="{Binding Down.Value, RelativeSource={RelativeSource TemplatedParent}}" VerticalAlignment="Center" />
+                            <Button Tag="+1"  Content="+" />
+                        </StackPanel>
+                        
+                        <Label Grid.Column="0" Grid.Row="1" Content="YARDS" />
+                        <StackPanel x:Name="YardsStackPanel" Grid.Column="1" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <TextBox x:Name="YardsTextBox" Text="{Binding Yards.Value, RelativeSource={RelativeSource TemplatedParent}}" 
+                                     VerticalAlignment="Center" HorizontalContentAlignment="Center" />
+                        </StackPanel>
+                    </Grid>
+                </controls:ConfigEnclosureControl>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

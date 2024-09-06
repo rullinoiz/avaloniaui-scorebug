@@ -1,0 +1,83 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:scoreboard2.Controls.Scoreboard.Football"
+        xmlns:tc="using:scoreboard2.Controls.Scoreboard"
+        xmlns:converters="using:scoreboard2.Converters">
+    
+    <Design.PreviewWith>
+        <controls:LogoNameScoreTimeoutDisplayLandscape Height="75" 
+                                                       Width="375" 
+                                                       CityName="lorem ipsum" 
+                                                       TeamName="lorem ipsum" 
+                                                       Score="10"
+                                                       Timeouts="3"
+                                                       HasBall="True"
+                                                       FontColor="White" />
+    </Design.PreviewWith>
+    
+    <Style Selector="controls|LogoNameScoreTimeoutDisplayLandscape /template/ :is(TextBlock)">
+        <Setter Property="Foreground"
+                Value="{Binding FontColor, 
+                RelativeSource={RelativeSource TemplatedParent}, 
+                Converter={x:Static converters:AvaloniaStaticConverters.ColorToBrushConverter}}"/>
+        
+        <Style Selector="^[Tag=Names]">
+            <Setter Property="FontFamily" Value="{DynamicResource InterFont}" />
+            <Setter Property="FontWeight" Value="ExtraBold" />
+            <Setter Property="LetterSpacing" Value="1" />
+        </Style>
+        
+        <Style Selector="^[Tag=Score]">
+            <Setter Property="FontFamily" Value="{DynamicResource InterFont}" />
+            <Setter Property="FontWeight" Value="ExtraBold" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="TextAlignment" Value="Center" />
+            <Setter Property="Width" Value="100" />
+            <Setter Property="Height" Value="75" />
+            <Setter Property="FontSize" Value="75" />
+            <Setter Property="LetterSpacing" Value="-1" />
+        </Style>
+    </Style>
+    
+    <Style Selector="controls|LogoNameScoreTimeoutDisplayLandscape /template/ :is(Rectangle)">
+        <Setter Property="Margin" Value="7" />
+        <Setter Property="Fill" Value="White" />
+    </Style>
+
+    <Style Selector="controls|LogoNameScoreTimeoutDisplayLandscape">
+        <!-- Set Defaults -->
+        
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Grid ColumnDefinitions="*, 15, 100" RowDefinitions="Auto, Auto" ShowGridLines="False">
+                    
+                    <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Spacing="5" Orientation="Horizontal" VerticalAlignment="Top" >
+                        <Image Margin="2" Source="{TemplateBinding Image}" Stretch="Uniform" Height="68" />
+                        <TextBlock Tag="Names" VerticalAlignment="Center" HorizontalAlignment="Right" LineSpacing="0">
+                            <Run FontSize="10" Text="{TemplateBinding CityName, 
+                                Converter={x:Static converters:StringUpper.Instance}}" />
+                            <LineBreak />
+                            <Run FontSize="25" Text="{TemplateBinding TeamName, 
+                                Converter={x:Static converters:StringUpper.Instance}}" />
+                        </TextBlock>
+                    </StackPanel>
+                    
+                    <Image Grid.Row="0" Grid.Column="1" Stretch="Uniform" Height="15" 
+                           IsVisible="{TemplateBinding HasBall}"
+                           VerticalAlignment="Top" Margin="0,10,0,0" 
+                           Source="avares://scoreboard2/Common/Assets/american-football-ball.png" />
+                    
+                    <Viewbox Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" StretchDirection="Both" VerticalAlignment="Top">
+                        <TextBlock Tag="Score" Text="{TemplateBinding Score}" />
+                    </Viewbox>
+                    
+                    <tc:BarValueDisplay Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Spacing="10"
+                                        Max="3" Value="{TemplateBinding Timeouts}" 
+                                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                    
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

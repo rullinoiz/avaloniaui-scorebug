@@ -12,14 +12,14 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="11.0.6" />
-        <PackageReference Include="Avalonia.Controls.ColorPicker" Version="11.0.6" />
-        <PackageReference Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)"/>
-        <PackageReference Include="Avalonia.Fonts.Inter" Version="$(AvaloniaVersion)"/>
-        <PackageReference Include="Avalonia.ReactiveUI" Version="$(AvaloniaVersion)"/>
+        <PackageReference Include="Avalonia" Version="11.1.3" />
+        <PackageReference Include="Avalonia.Controls.ColorPicker" Version="11.1.3" />
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.1.3" />
+        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.1.3" />
+        <PackageReference Include="Avalonia.ReactiveUI" Version="11.1.3" />
         <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)"/>
-        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.1.3" />
+        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.0" />
     </ItemGroup>
 
     <ItemGroup>
@@ -33,6 +33,30 @@
       </Compile>
       <Compile Update="Windows\ScoreboardWindow.axaml.cs">
         <DependentUpon>ScoreboardWindow.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\Baseball\BaseballConfigView.axaml.cs">
+        <DependentUpon>BaseballConfigView.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\Baseball\BaseballScorebugView.axaml.cs">
+        <DependentUpon>BaseballScorebugView.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\Basketball\BasketballConfigView.axaml.cs">
+        <DependentUpon>BasketballConfigView.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Controls\Scoreboard\Baseball\BaseDisplayBig.axaml.cs">
+        <DependentUpon>BaseDisplayBig.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Controls\Scoreboard\Baseball\InningDisplayBig.axaml.cs">
+        <DependentUpon>InningDisplayBig.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Controls\Football\DownsAndYards2Go.axaml.cs">
+        <DependentUpon>DownsAndYards2Go.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
     </ItemGroup>

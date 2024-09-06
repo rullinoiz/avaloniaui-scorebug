@@ -24,11 +24,14 @@
         <StyleInclude Source="avares://scoreboard2/Controls/QuickColorControl.axaml" />
         <StyleInclude Source="avares://scoreboard2/Controls/ConfigEnclosureControl.axaml" />
         <StyleInclude Source="avares://scoreboard2/Controls/Scoreboard/ScoreDisplayLogoBig.axaml" />
-        <StyleInclude Source="avares://scoreboard2/Controls/Scoreboard/InningDisplayBig.axaml" />
-        <StyleInclude Source="avares://scoreboard2/Controls/Scoreboard/BaseDisplayBig.axaml" />
+        <StyleInclude Source="avares://scoreboard2/Controls/Scoreboard/Baseball/InningDisplayBig.axaml" />
+        <StyleInclude Source="avares://scoreboard2/Controls/Scoreboard/Baseball/BaseDisplayBig.axaml" />
+        <StyleInclude Source="avares://scoreboard2/Controls/Scoreboard/Football/LogoNameScoreTimeoutDisplayLandscape.axaml" />
+        <StyleInclude Source="avares://scoreboard2/Controls/QuickTextControl.axaml" />
+        <StyleInclude Source="avares://scoreboard2/Controls/Scoreboard/BarValueDisplay.axaml" />
         <StyleInclude Source="avares://scoreboard2/Controls/Scoreboard/DotValueDisplaySmall.axaml" />
-
-
+        
+        <StyleInclude Source="avares://scoreboard2/Controls/Football/DownsAndYards2Go.axaml" />
 
     </Application.Styles>
              

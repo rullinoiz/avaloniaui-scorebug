@@ -4,9 +4,10 @@ using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
+using scoreboard2.Models;
 using scoreboard2.Models.Baseball;
 
-namespace scoreboard2.Controls.Scoreboard;
+namespace scoreboard2.Controls.Scoreboard.Baseball;
 
 public class InningDisplayBig : TemplatedControl
 {

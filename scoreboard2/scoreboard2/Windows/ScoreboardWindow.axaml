@@ -3,19 +3,24 @@
         xmlns:vm="using:scoreboard2.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:views="clr-namespace:scoreboard2.Views"
-        mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="100"
-        MinWidth="450" MinHeight="100" CanResize="False"
-        Width="500" Height="125"
+        xmlns:baseball="using:scoreboard2.Views.Baseball"
+        xmlns:football="using:scoreboard2.Views.Football"
+        mc:Ignorable="d" CanResize="False"
         x:Class="scoreboard2.Windows.ScoreboardWindow"
         x:DataType="vm:MainViewModel"
         Icon="/Common/Assets/avalonia-logo.ico"
         Title="display">
+    
+    <!--d:DesignWidth="450" d:DesignHeight="100"
+        MinWidth="450" MinHeight="100" CanResize="False"
+        Width="500" Height="125" -->
         
-        <Design.DataContext>
-                <vm:MainViewModel/>
-        </Design.DataContext>
+    <Design.DataContext>
+        <vm:MainViewModel/>
+    </Design.DataContext>
         
-        <views:ScoreboardView />
-        
+    <Carousel SelectedIndex="{Binding SelectedGame}">
+        <baseball:BaseballScorebugView />
+        <football:FootballScorebugView />
+    </Carousel>
 </Window>

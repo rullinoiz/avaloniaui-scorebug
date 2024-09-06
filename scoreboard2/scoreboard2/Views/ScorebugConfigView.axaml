@@ -8,13 +8,18 @@
              x:Class="scoreboard2.Views.ScorebugConfigView"
              x:DataType="vm:MainViewModel">
     
-    <Grid Margin="5" ColumnDefinitions="*, *" RowDefinitions="Auto, Auto, Auto, Auto">
-        <c:QuickImageControl Grid.Column="0" Grid.Row="0" Title="HOME IMAGE" Image="{Binding Game.Settings.HomeImage, Mode=TwoWay}" />
-        <c:QuickImageControl Grid.Column="1" Grid.Row="0" Title="AWAY IMAGE" Image="{Binding Game.Settings.AwayImage, Mode=TwoWay}" />
+    <Grid Margin="5" ColumnDefinitions="*, *" RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto">
+        <c:QuickImageControl Grid.Column="0" Grid.Row="0" Title="HOME IMAGE" Image="{Binding BaseGame.Settings.HomeImage, Mode=TwoWay}" />
+        <c:QuickImageControl Grid.Column="1" Grid.Row="0" Title="AWAY IMAGE" Image="{Binding BaseGame.Settings.AwayImage, Mode=TwoWay}" />
         
-        <c:QuickColorControl Grid.Column="0" Grid.Row="1" Title="HOME BG" Color="{Binding Game.Settings.HomeBackgroundColor, Mode=TwoWay}"/>
-        <c:QuickColorControl Grid.Column="1" Grid.Row="1" Title="AWAY BG" Color="{Binding Game.Settings.AwayBackgroundColor, Mode=TwoWay}"/>
-        <c:QuickColorControl Grid.Column="0" Grid.Row="2" Title="HOME FG" Color="{Binding Game.Settings.HomeForegroundColor, Mode=TwoWay}"/>
-        <c:QuickColorControl Grid.Column="1" Grid.Row="2" Title="AWAY FG" Color="{Binding Game.Settings.AwayForegroundColor, Mode=TwoWay}"/>
+        <c:QuickColorControl Grid.Column="0" Grid.Row="1" Title="HOME BG" Color="{Binding BaseGame.Settings.HomeBackgroundColor, Mode=TwoWay}" />
+        <c:QuickColorControl Grid.Column="1" Grid.Row="1" Title="AWAY BG" Color="{Binding BaseGame.Settings.AwayBackgroundColor, Mode=TwoWay}" />
+        <c:QuickColorControl Grid.Column="0" Grid.Row="2" Title="HOME FG" Color="{Binding BaseGame.Settings.HomeForegroundColor, Mode=TwoWay}" />
+        <c:QuickColorControl Grid.Column="1" Grid.Row="2" Title="AWAY FG" Color="{Binding BaseGame.Settings.AwayForegroundColor, Mode=TwoWay}" />
+        <c:QuickTextControl Grid.Column="0" Grid.Row="3" Title="HOME CITY" Value="{Binding BaseGame.Settings.HomeCityName, Mode=TwoWay}" />
+        <c:QuickTextControl Grid.Column="1" Grid.Row="3" Title="AWAY CITY" Value="{Binding BaseGame.Settings.AwayCityName, Mode=TwoWay}" />
+        
+        <c:QuickTextControl Grid.Column="0" Grid.Row="4" Title="HOME TEAM" Value="{Binding BaseGame.Settings.HomeTeamName, Mode=TwoWay}" />
+        <c:QuickTextControl Grid.Column="1" Grid.Row="4" Title="AWAY TEAM" Value="{Binding BaseGame.Settings.AwayTeamName, Mode=TwoWay}" />
     </Grid>
 </UserControl>
