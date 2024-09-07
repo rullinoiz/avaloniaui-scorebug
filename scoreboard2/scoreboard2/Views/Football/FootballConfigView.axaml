@@ -30,7 +30,7 @@
                 </StackPanel>
                 
                 <c:InningControl Grid.Column="1" Grid.Row="2" Grid.RowSpan="2" Inning="{Binding BaseGame.Period}" />
-                <fc:DownsAndYards2Go Grid.Column="0" Grid.Row="3" Down="{Binding Football.Down}" Yards="{Binding Football.Yards}" />
+                <fc:DownsAndYards2Go Grid.Column="0" Grid.Row="3" Down="{Binding Football.Down, Mode=TwoWay}" Yards="{Binding Football.Yards, Mode=TwoWay}" Output="{Binding Football.Output, Mode=TwoWay}" />
             </Grid>
         </ScrollViewer>
     </StackPanel>

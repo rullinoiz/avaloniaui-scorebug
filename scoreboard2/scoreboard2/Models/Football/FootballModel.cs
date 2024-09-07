@@ -12,4 +12,6 @@ public partial class FootballModel : ExtraModelBase
 
     public TemporaryNamedValue Down { get; } = new("DOWN", initial: 1, clearValue: 1);
     public TemporaryNamedValue Yards { get; } = new("YARDS", initial: 10, clearValue: 10);
+
+    [ObservableProperty] private string _output = string.Empty;
 }

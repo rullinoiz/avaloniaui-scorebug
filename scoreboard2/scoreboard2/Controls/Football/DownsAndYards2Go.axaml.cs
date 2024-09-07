@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using Avalonia;
 using Avalonia.Controls.Primitives;
 using scoreboard2.Converters;
@@ -48,18 +49,19 @@ public class DownsAndYards2Go : TemplatedControl
     public void Reset()
     {
         Yards.Clear();
-        Down.Clear();
+        Down.Value = 0;
+    }
+
+    public void OnPropertyChanged(object? o, PropertyChangedEventArgs args)
+    {
+        Output = Down.Value <= 0 ? "" : $"{StringTercer.Convert(Down.Value)} & {Yards.Value}";
     }
     
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);
-        
-        PropertyChanged += (_, args) =>
-        {
-            if (args.Property != DownProperty && args.Property != YardsProperty) return;
 
-            Output = $"{StringTercer.Convert(Down.Value)} & {Yards.Value}";
-        };
+        Down.PropertyChanged += OnPropertyChanged;
+        Yards.PropertyChanged += OnPropertyChanged;
     }
 }

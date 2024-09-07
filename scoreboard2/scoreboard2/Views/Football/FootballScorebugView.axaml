@@ -43,16 +43,8 @@
         
         <!-- down & left 2 go -->
         <TextBlock Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" 
-                   FontSize="20" FontFamily="{StaticResource InterFont}" FontWeight="ExtraBold">
-            <TextBlock.Text>
-                <MultiBinding StringFormat="{}{0} {1} {2}">
-                    <Binding Path="Football.Down.Value" 
-                             Converter="{x:Static converters:StringTercer.Instance}" />
-                    <Binding Path="Ampersand" />
-                    <Binding Path="Football.Yards.Value" />
-                </MultiBinding>
-            </TextBlock.Text>
-        </TextBlock>
+                   FontSize="20" FontFamily="{StaticResource InterFont}" FontWeight="ExtraBold" 
+                   Text="{Binding Football.Output}" />
     </Grid>
     
 </UserControl>
