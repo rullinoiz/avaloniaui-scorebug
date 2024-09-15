@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:c="using:scoreboard2.Controls"
              xmlns:vm="using:scoreboard2.ViewModels"
+             xmlns:r="using:scoreboard2.RemoteControl"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="scoreboard2.Views.ScorebugConfigView"
              x:DataType="vm:MainViewModel">
@@ -21,5 +22,25 @@
         
         <c:QuickTextControl Grid.Column="0" Grid.Row="4" Title="HOME TEAM" Value="{Binding BaseGame.Settings.HomeTeamName, Mode=TwoWay}" />
         <c:QuickTextControl Grid.Column="1" Grid.Row="4" Title="AWAY TEAM" Value="{Binding BaseGame.Settings.AwayTeamName, Mode=TwoWay}" />
+        
+        <c:ConfigEnclosureControl Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5" Title="REPLICATOR URL">
+            <c:ConfigEnclosureControl.Value>
+                <Label Content="{Binding Connected, Source={x:Static r:ReplicatorService.Instance}}" />
+            </c:ConfigEnclosureControl.Value>
+            
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                <TextBox HorizontalAlignment="Stretch" Text="{Binding BaseGame.Settings.ReplicatorUrl}" />
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Content="Connect" 
+                            IsEnabled="{Binding !Connected, Source={x:Static r:ReplicatorService.Instance}}"
+                            Command="{Binding ConfigureSocket, Source={x:Static r:ReplicatorService.Instance}}"
+                            CommandParameter="{Binding BaseGame.Settings.ReplicatorUrl}" />
+                    <Button Content="Disconnect" 
+                            IsEnabled="{Binding Connected, Source={x:Static r:ReplicatorService.Instance}}" 
+                            Command="{Binding Close, Source={x:Static r:ReplicatorService.Instance}}" />
+                </StackPanel>
+            </StackPanel>
+        </c:ConfigEnclosureControl>
+        
     </Grid>
 </UserControl>

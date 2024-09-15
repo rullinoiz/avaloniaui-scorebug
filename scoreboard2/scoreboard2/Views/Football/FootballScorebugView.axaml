@@ -3,7 +3,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:scoreboard2.ViewModels"
-             xmlns:c="using:scoreboard2.Controls.Scoreboard"
              xmlns:converters="using:scoreboard2.Converters"
              mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="75"
              x:Class="scoreboard2.Views.Football.FootballScorebugView"

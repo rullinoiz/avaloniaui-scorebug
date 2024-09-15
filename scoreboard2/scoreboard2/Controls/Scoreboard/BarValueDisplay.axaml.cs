@@ -69,7 +69,6 @@ public class BarValueDisplay : TemplatedControl
         PropertyChanged += (_, args) =>
         {
             if (args.Property != ValueProperty) return;
-            Console.WriteLine($"{_getWidth()}, {_getHeight()}");
             var x = Value;
             foreach (var i in _panel.Children)
             {

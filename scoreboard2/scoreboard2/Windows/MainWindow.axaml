@@ -12,5 +12,5 @@
         Icon="/Common/Assets/avalonia-logo.ico"
         Title="Controls">
         
-        <views:MainView />
+        <views:MainViewDesktop />
 </Window>

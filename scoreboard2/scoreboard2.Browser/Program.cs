@@ -2,16 +2,15 @@
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Browser;
-using Avalonia.ReactiveUI;
-using scoreboard2;
 
 [assembly: SupportedOSPlatform("browser")]
 
-internal sealed partial class Program
+namespace scoreboard2.Browser;
+
+internal sealed class Program
 {
-    private static Task Main(string[] args) => BuildAvaloniaApp()
+    private static Task Main(string[] _) => BuildAvaloniaApp()
         .WithInterFont()
-        .UseReactiveUI()
         .StartBrowserAppAsync("out");
 
     public static AppBuilder BuildAvaloniaApp()

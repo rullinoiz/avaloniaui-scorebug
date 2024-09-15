@@ -2,9 +2,9 @@ using Avalonia.Controls;
 
 namespace scoreboard2.Views;
 
-public partial class MainView : UserControl
+public partial class MainViewBrowser : UserControl
 {
-    public MainView()
+    public MainViewBrowser()
     {
         InitializeComponent();
     }

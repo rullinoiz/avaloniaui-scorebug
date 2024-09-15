@@ -1,0 +1,38 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:scoreboard2.ViewModels"
+             xmlns:views="using:scoreboard2.Views"
+             xmlns:baseball="using:scoreboard2.Views.Baseball"
+             xmlns:football="using:scoreboard2.Views.Football"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="scoreboard2.Views.MainViewBrowser"
+             x:DataType="vm:MainViewModel">
+    
+    <Design.DataContext>
+        <vm:MainViewModel />
+    </Design.DataContext>
+    
+    <TabControl>
+        <TabItem Header="Scoreboard Controls">
+            <TabControl SelectedIndex="{Binding SelectedGame}">
+                <TabItem Header="Baseball">
+                    <ScrollViewer>
+                        <baseball:BaseballConfigView />
+                    </ScrollViewer>
+                </TabItem>
+                <TabItem Header="Football">
+                    <ScrollViewer>
+                        <football:FootballConfigView />
+                    </ScrollViewer>
+                </TabItem>
+            </TabControl>
+        </TabItem>
+        <TabItem Header="Config">
+            <ScrollViewer>
+                <views:ScorebugConfigView />
+            </ScrollViewer>
+        </TabItem>
+    </TabControl>
+</UserControl>

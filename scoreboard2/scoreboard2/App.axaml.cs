@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using scoreboard2.RemoteControl;
 using scoreboard2.ViewModels;
 using scoreboard2.Views;
 using MainWindow = scoreboard2.Windows.MainWindow;
@@ -16,23 +17,28 @@ public class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
-        var context = new MainViewModel();
+        var vm = new MainViewModel();
+        ReplicatorService.Instance.RegisterProperties(vm);
+        ReplicatorService.Instance.Setup(vm);
+        
+        //ReplicatorService.ConfigureSocket("ws://localhost:25565/replicator");
+
         switch (ApplicationLifetime)
         {
             case IClassicDesktopStyleApplicationLifetime desktop:
                 desktop.MainWindow = new MainWindow
                 {
-                    DataContext = context
+                    DataContext = vm
                 };
                 break;
             case ISingleViewApplicationLifetime singleViewPlatform:
-                singleViewPlatform.MainView = new MainView
+                singleViewPlatform.MainView = new MainViewBrowser
                 {
-                    DataContext = context
+                    DataContext = vm
                 };
                 break;
         }
-
+        
         base.OnFrameworkInitializationCompleted();
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -18,4 +17,6 @@ public partial class GameSettings : ObservableObject
     [ObservableProperty] private Color _awayForegroundColor = Colors.White;
     [ObservableProperty] private string _awayCityName = string.Empty;
     [ObservableProperty] private string _awayTeamName = string.Empty;
+
+    [ObservableProperty] private string _replicatorUrl = string.Empty;
 }
