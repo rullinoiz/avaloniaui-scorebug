@@ -20,6 +20,7 @@ public class App : Application
         var vm = new MainViewModel();
         ReplicatorService.Instance.RegisterProperties(vm);
         ReplicatorService.Instance.Setup(vm);
+        // ReplicatorService.Instance.DebouncePropertyList.Add(vm.BaseGame.);
         
         //ReplicatorService.ConfigureSocket("ws://localhost:25565/replicator");
 

@@ -3,8 +3,7 @@
         xmlns:vm="using:scoreboard2.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:baseball="using:scoreboard2.Views.Baseball"
-        xmlns:football="using:scoreboard2.Views.Football"
+        xmlns:views="using:scoreboard2.Views"
         mc:Ignorable="d" CanResize="False"
         x:Class="scoreboard2.Windows.ScoreboardWindow"
         x:DataType="vm:MainViewModel"
@@ -19,8 +18,5 @@
         <vm:MainViewModel/>
     </Design.DataContext>
         
-    <Carousel SelectedIndex="{Binding SelectedGame}">
-        <baseball:BaseballScorebugView />
-        <football:FootballScorebugView />
-    </Carousel>
+    <views:ScorebugContentView />
 </Window>

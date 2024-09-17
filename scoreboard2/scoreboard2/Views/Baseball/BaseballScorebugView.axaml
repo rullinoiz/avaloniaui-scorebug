@@ -25,7 +25,7 @@
         </Border>
         <Grid ColumnDefinitions="*, 125, *" Grid.Column="1" VerticalAlignment="Center" Background="Black">
             <Border Grid.Column="0">
-                <baseball:InningDisplayBig Inning="{Binding BaseGame.Period}" />
+                <baseball:InningDisplayBig Inning="{Binding Baseball.Inning}" />
             </Border>
             <Border Grid.Column="1">
                 <StackPanel HorizontalAlignment="Center" Spacing="-20">

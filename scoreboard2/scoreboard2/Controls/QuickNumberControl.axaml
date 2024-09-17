@@ -33,7 +33,9 @@
                             <Button Name="ButtonPlusTwo" Tag="Modify">+2</Button>
                             <Button Name="ButtonPlusThree" Tag="Modify">+3</Button>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Spacing="10">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Spacing="5">
+                            <Button Content="Reset" HorizontalAlignment="Center" 
+                                    Command="{Binding ResetClickFunction, RelativeSource={RelativeSource TemplatedParent}}" />
                             <Button Content="Undo" HorizontalAlignment="Center"
                                     Command="{Binding RevertClickFunction, RelativeSource={RelativeSource TemplatedParent}}" />
                             <Button Content="Commit" HorizontalAlignment="Center" Name="CommitButton" x:Name="CommitButton" 

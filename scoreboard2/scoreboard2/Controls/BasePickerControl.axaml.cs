@@ -27,19 +27,24 @@ public class BasePickerControl : TemplatedControl
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);
-
+    
         Base ??= new Base();
-
+    
         _base1 = e.NameScope.Find<Button>(name: "Base1");
         _base2 = e.NameScope.Find<Button>(name: "Base2");
         _base3 = e.NameScope.Find<Button>(name: "Base3");
 
-        Base.PropertyChanged += (_, _) =>
+        Base.Base1.PropertyChanged += (_, _) =>
         {
-            // if (args.PropertyName != nameof(Base.BaseStates)) return;
-            _base1!.Background = Base.BaseStates[0] ? OnColor : OffColor;
-            _base2!.Background = Base.BaseStates[1] ? OnColor : OffColor;
-            _base3!.Background = Base.BaseStates[2] ? OnColor : OffColor;
+            _base1!.Background = Base.Base1.State ? OnColor : OffColor;
+        };
+        Base.Base2.PropertyChanged += (_, _) =>
+        {
+            _base2!.Background = Base.Base2.State ? OnColor : OffColor;
+        };
+        Base.Base3.PropertyChanged += (_, _) =>
+        {
+            _base3!.Background = Base.Base3.State ? OnColor : OffColor;
         };
     }
 

@@ -1,8 +1,3 @@
-#if BROWSER
-using System.Runtime.InteropServices.JavaScript;
-using System.Runtime.Versioning;
-using System.Threading.Tasks;
-#endif
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,38 +6,34 @@ using System.Reflection;
 using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using scoreboard2.RemoteControl.Attributes;
+using scoreboard2.RemoteControl.Common;
+using scoreboard2.RemoteControl.WebSocketPlatform;
 using WebSocketSharp;
 
 namespace scoreboard2.RemoteControl;
 
-#if BROWSER
-[SupportedOSPlatform("browser")]
-#endif
 public partial class ReplicatorService : ObservableObject
 {
     public static ReplicatorService Instance { get; private set; }
+    public static ISocketShim Shim { get; }
 
     static ReplicatorService()
     {
         Instance = new ReplicatorService();
-#if BROWSER
-        var path = "../sockets.js";
-        Console.WriteLine("trying " + path);
-        _ = JSHost.ImportAsync("sockets", path);
-        // JSHost.ImportAsync("Send", "./main.js").RunSynchronously();
-        // JSHost.ImportAsync("Close", "./main.js").RunSynchronously();
-#endif
+        
+        // WebSocketSharp uses System.Net.Sockets which is NOT supported by .NET WASM
+        // this lets us swap out implementations for one that shims JavaScript's native WebSocket
+        Shim = OperatingSystem.IsBrowser() ? WebSocketShimJS.Instance : WebSocketShimNative.Instance;
     }
-
-    [ObservableProperty] private bool _connected;
     
     #region private
 
     private object? _viewModel;
-    private record RegisteredPropertyInfo(string Path, List<string> Properties);
-    private readonly Dictionary<object, RegisteredPropertyInfo> DebouncePropertyList = [];
-    private readonly string[] BlacklistedProperties = ["ReplicatorUrl", "HomeImage", "AwayImage", "HomeBackgroundColor", "HomeForegroundColor", "AwayBackgroundColor", "AwayForegroundColor"];
-
+    public record RegisteredPropertyInfo(string Path, List<string> Properties);
+    public readonly Dictionary<object, RegisteredPropertyInfo> DebouncePropertyList = [];
+    private readonly string[] _blacklistedProperties = [];
     private object? GetObjectFromPath(string path)
     {
         var properties = path.Split(".").ToList();
@@ -67,7 +58,7 @@ public partial class ReplicatorService : ObservableObject
     #endregion
     private void PropertyChangedInput(object? sender, PropertyChangedEventArgs args)
     {
-        if (BlacklistedProperties.Contains(args.PropertyName)) return;
+        if (_blacklistedProperties.Contains(args.PropertyName)) return;
         
         RegisteredPropertyInfo? info = null;
         if (sender is not null && DebouncePropertyList.TryGetValue(sender, out info) 
@@ -77,13 +68,14 @@ public partial class ReplicatorService : ObservableObject
             return;
         }
         
-        var val = sender?.GetType().GetProperty(args.PropertyName!)?.GetValue(sender);
+        var property = sender?.GetType().GetProperty(args.PropertyName!);
+        if (property?.GetCustomAttribute<ReplicatorIgnoreAttribute>() is not null) return;
+        var val = property?.GetValue(sender);
         Console.WriteLine($"{info?.Path + "." + args.PropertyName} => ({val?.GetType()}) {val}");
 
         if (Property2String(sender!, args.PropertyName!) is not { } fullPath || val is null) return;
-        var data = new Dictionary<string, object> { {fullPath, val} };
+        var data = new ReplicatorMessage(ReplicatorSignal.Change, new ReplicatorEntries { {fullPath, val} });
         var serializedData = JsonConvert.SerializeObject(data);
-        Console.WriteLine("sending data => " + serializedData);
         Send(serializedData);
     }
     
@@ -97,7 +89,17 @@ public partial class ReplicatorService : ObservableObject
             oo.PropertyChanged += PropertyChangedInput;
             Console.WriteLine($"{oo.GetType().Name} is observableobject");
         }
-        else return;
+        else
+        {
+            switch (o)
+            {
+                case string _:
+                case int _:
+                case byte _:
+                case bool _:
+                    return;
+            }
+        }
 
         foreach (var p in properties)
         {
@@ -116,63 +118,30 @@ public partial class ReplicatorService : ObservableObject
 
 public partial class ReplicatorService
 {
-#if !BROWSER
-    [ObservableProperty] private WebSocket? _socket;
+    public void ConfigureSocket(string url) => Shim.ConfigureSocket(url);
+
+    public void Send(string data) => Shim.Send(data);
+    public void Close() => Shim.Close();
     
-    public void ConfigureSocket(string url)
-    {
-        Connected = false;
-        Socket?.Close();
-        Socket = new WebSocket(url);
-
-        Socket.OnMessage += (sender, args) => SocketOnMessage(sender, args.Data);
-
-        Socket.OnOpen += SocketOnOpen;
-
-        Socket.OnClose += SocketOnClose;
-        
-        Socket.Connect();
-    }
-
-    public void Send(string data) => Socket?.Send(data);
-    public void Close() => Socket?.Close();
-#endif
-    
-#if BROWSER
-    public void ConfigureSocket(string url) => ConfigureSocketJS(url);
-
-    [JSImport("SetupWebsocket", "sockets")] 
-    public static partial void ConfigureSocketJS([JSMarshalAs<JSType.String>] string url);
-
-    [JSImport("Send", "sockets")]
-    public static partial void Send([JSMarshalAs<JSType.String>] string data);
-
-    [JSImport("Close", "sockets")]
-    public static partial void Close();
-
-    [JSExport] private static void SocketOnMessage([JSMarshalAs<JSType.String>] string data) => Instance.SocketOnMessage(null, data);
-    [JSExport] private static void SocketOnOpen() => SocketOnOpen(null, null);
-    [JSExport] private static void SocketOnClose() => SocketOnClose(null, null);
-#endif
-    
-    private static void SocketOnOpen(object? _ = null, EventArgs? args = null)
+    public static void SocketOnOpen(object? _ = null, EventArgs? args = null)
     {
         Console.WriteLine("now connected " + args);
-        Instance.Connected = true;
+        Shim.Connected = true;
     }
 
-    private static void SocketOnClose(object? _ = null, EventArgs? args = null)
+    public static void SocketOnClose(object? _ = null, EventArgs? args = null)
     {
         Console.WriteLine("now disconnected " + args);
-        Instance.Connected = false;
+        Shim.Connected = false;
     }
     
-    private void SocketOnMessage(object? _, string raw)
+    public void SocketOnMessage(object? _, string raw)
     {
         Console.WriteLine("new data => " + raw);
-        if (JsonConvert.DeserializeObject<Dictionary<string, object>>(raw) is not { } data) return;
+        if (JsonConvert.DeserializeObject<ReplicatorMessage>(raw) is not var (replicatorSignal, data)) return;
+        if (replicatorSignal == ReplicatorSignal.Sync) return;
 
-        foreach (var property in data)
+        foreach (var property in data!)
         {
             if (GetObjectFromPath(property.Key) is not { } o) continue;
             var propertyName = property.Key.Split(".").Last();
@@ -180,10 +149,23 @@ public partial class ReplicatorService
 
             if (!DebouncePropertyList.TryGetValue(o, out var r)) continue;
             r.Properties.Add(propertyName);
-            object? val = null;
-            if (property.Value is long l) val = (int)l;
+
+            object? val;
+            switch (propertyInfo.PropertyType)
+            {
+                case { } t when t == typeof(int):
+                    val = Convert.ToInt32(property.Value);
+                    break;
+                case { } t when t == typeof(Avalonia.Media.Imaging.Bitmap):
+                    return;
+                default:
+                    Console.WriteLine("using built in converter");
+                    val = ((JObject)property.Value).ToObject(propertyInfo.PropertyType);
+                    break;
+            }
             Dispatcher.UIThread.Invoke(
-                () => { try { propertyInfo.SetValue(o, val ?? property.Value); } catch (ArgumentException) { } });
+                () => { try { propertyInfo.SetValue(o, val ?? property.Value); } catch (ArgumentException) { } }
+            );
         }
     }
 }

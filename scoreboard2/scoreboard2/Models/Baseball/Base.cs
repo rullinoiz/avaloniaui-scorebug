@@ -1,23 +1,21 @@
-using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace scoreboard2.Models.Baseball;
 
-public partial class Base : ObservableObject
+public class Base
 {
-    public const int Bases = 3;
-
-    [ObservableProperty] private ObservableCollection<BaseState> _baseStates;
+    public BaseState Base1 { get; } = false;
+    public BaseState Base2 { get; } = false;
+    public BaseState Base3 { get; } = false;
     
     public void Toggle(int b)
     {
-        BaseStates[b].Toggle();
-        OnPropertyChanged();
-    }
-
-    public Base()
-    {
-        BaseStates = [false, false, false];
+        switch (b)
+        {
+            case 0: Base1.Toggle(); break;
+            case 1: Base2.Toggle(); break;
+            case 2: Base3.Toggle(); break;
+        }
     }
 }
 
@@ -28,6 +26,5 @@ public partial class BaseState(bool state) : ObservableObject
     public void Toggle() => State ^= true;
 
     public override string ToString() => State.ToString();
-    public static implicit operator bool(BaseState e) => e.State;
     public static implicit operator BaseState(bool e) => new(e);
 }

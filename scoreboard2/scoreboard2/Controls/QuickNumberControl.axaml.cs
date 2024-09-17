@@ -59,6 +59,8 @@ public class QuickNumberControl : TemplatedControl
         _editValue!.Text = t.ToString();
     }
 
+    public void ResetClickFunction() => _editValue!.Text = CurrentValue.ToString();
+
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);

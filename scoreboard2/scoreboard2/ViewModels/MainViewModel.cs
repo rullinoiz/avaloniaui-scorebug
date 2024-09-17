@@ -3,12 +3,15 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using scoreboard2.Models;
 using scoreboard2.Models.Baseball;
 using scoreboard2.Models.Football;
+using scoreboard2.RemoteControl.Attributes;
 using scoreboard2.ViewModels.Common;
 
-#if !BROWSER
+#if !(BROWSER || IOS || ANDROID)
 using Avalonia.Controls;
 using scoreboard2.Windows;
 #endif
+
+#pragma warning disable CS0657
 
 namespace scoreboard2.ViewModels;
 
@@ -20,10 +23,18 @@ public partial class MainViewModel : ViewModelBase
     
     [ObservableProperty] private int _selectedGame;
     
-#if !BROWSER
-    private record ScorebugSize(double Width, double Height);
+    [ObservableProperty] 
+    [property: ReplicatorIgnore]
+    private double _scoreboardWidth;
     
+    [ObservableProperty] 
+    [property: ReplicatorIgnore]
+    private double _scoreboardHeight;
+    
+#if !(BROWSER || IOS || ANDROID)
     private readonly Window? _scoreboardWindow;
+#endif
+    private record ScorebugSize(double Width, double Height);
     private readonly ScorebugSize[] _scorebugSizes = [
         new ScorebugSize(500, 125),
         new ScorebugSize(1000, 75)
@@ -32,22 +43,25 @@ public partial class MainViewModel : ViewModelBase
     partial void OnSelectedGameChanged(int value)
     {
         var size = _scorebugSizes[value];
+        ScoreboardWidth = size.Width;
+        ScoreboardHeight = size.Height;
+#if !(BROWSER || IOS || ANDROID)
         _scoreboardWindow!.Width = size.Width;
         _scoreboardWindow!.Height = size.Height;
-    }
 #endif
+    }
     
     public MainViewModel()
     {
         Console.WriteLine("instantiating main view model");
         
-#if !BROWSER
+#if !(BROWSER || IOS || ANDROID)
         _scoreboardWindow = new ScoreboardWindow(this);
         var scorebugConfig = new ScorebugConfig(this);
         _scoreboardWindow.Show();
         scorebugConfig.Show();
+#endif
         
         OnSelectedGameChanged(SelectedGame);
-#endif
     }
 }

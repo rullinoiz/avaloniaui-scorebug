@@ -25,18 +25,23 @@
         
         <c:ConfigEnclosureControl Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5" Title="REPLICATOR URL">
             <c:ConfigEnclosureControl.Value>
-                <Label Content="{Binding Connected, Source={x:Static r:ReplicatorService.Instance}}" />
+                <Label Content="{Binding Shim.Connected, Source={x:Static r:ReplicatorService.Instance}}" />
             </c:ConfigEnclosureControl.Value>
             
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Stretch">
-                <TextBox HorizontalAlignment="Stretch" Text="{Binding BaseGame.Settings.ReplicatorUrl}" />
+                <TextBox HorizontalAlignment="Stretch" 
+                         IsEnabled="{Binding !Shim.Connected, Source={x:Static r:ReplicatorService.Instance}}" 
+                         Text="{Binding BaseGame.Settings.ReplicatorUrl}" />
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <Button Content="Connect" 
-                            IsEnabled="{Binding !Connected, Source={x:Static r:ReplicatorService.Instance}}"
+                            IsEnabled="{Binding !Shim.Connected, Source={x:Static r:ReplicatorService.Instance}}"
                             Command="{Binding ConfigureSocket, Source={x:Static r:ReplicatorService.Instance}}"
                             CommandParameter="{Binding BaseGame.Settings.ReplicatorUrl}" />
+                    <!-- <Button Content="Sync"  -->
+                    <!--         IsEnabled="{Binding Shim.Connected, Source={x:Static r:ReplicatorService.Instance}}"  -->
+                    <!--         Command="{Binding Close, Source={x:Static r:ReplicatorService.Instance}}" /> -->
                     <Button Content="Disconnect" 
-                            IsEnabled="{Binding Connected, Source={x:Static r:ReplicatorService.Instance}}" 
+                            IsEnabled="{Binding Shim.Connected, Source={x:Static r:ReplicatorService.Instance}}" 
                             Command="{Binding Close, Source={x:Static r:ReplicatorService.Instance}}" />
                 </StackPanel>
             </StackPanel>

@@ -14,25 +14,35 @@
         <vm:MainViewModel />
     </Design.DataContext>
     
-    <TabControl>
-        <TabItem Header="Scoreboard Controls">
-            <TabControl SelectedIndex="{Binding SelectedGame}">
-                <TabItem Header="Baseball">
-                    <ScrollViewer>
-                        <baseball:BaseballConfigView />
-                    </ScrollViewer>
-                </TabItem>
-                <TabItem Header="Football">
-                    <ScrollViewer>
-                        <football:FootballConfigView />
-                    </ScrollViewer>
-                </TabItem>
-            </TabControl>
-        </TabItem>
-        <TabItem Header="Config">
-            <ScrollViewer>
-                <views:ScorebugConfigView />
-            </ScrollViewer>
-        </TabItem>
-    </TabControl>
+    <StackPanel>
+        <Expander Header="Scorebug Simulator">
+        <Viewbox Stretch="UniformToFill">
+            <views:ScorebugContentView Width="{Binding ScoreboardWidth}" 
+                                       Height="{Binding ScoreboardHeight}" />
+        </Viewbox>
+        </Expander>
+        <TabControl>
+            <TabItem Header="Scoreboard Controls">
+                <TabControl SelectedIndex="{Binding SelectedGame}">
+                    <TabItem Header="Baseball">
+                        <ScrollViewer>
+                            <baseball:BaseballConfigView />
+                        </ScrollViewer>
+                    </TabItem>
+                    <TabItem Header="Football">
+                        <ScrollViewer>
+                            <football:FootballConfigView />
+                        </ScrollViewer>
+                    </TabItem>
+                </TabControl>
+            </TabItem>
+            <TabItem Header="Config">
+                <ScrollViewer>
+                    <views:ScorebugConfigView />
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+    </StackPanel>
+    
+    
 </UserControl>

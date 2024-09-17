@@ -8,5 +8,4 @@ public class BaseGame(GameSettings? settings = null) : ObservableObject
     
     public Score HomeScore { get; } = new("HOME");
     public Score AwayScore { get; } = new("AWAY");
-    public Inning Period { get; } = new();
 }

@@ -6,5 +6,5 @@ public partial class NamedValue(string? name = null, int initial = 0) : Observab
 {
     public string Name { get; } = name ?? string.Empty;
     // ReSharper disable once InconsistentNaming
-    [ObservableProperty] protected int _value = initial;
+    [ObservableProperty] private int _value = initial;
 }

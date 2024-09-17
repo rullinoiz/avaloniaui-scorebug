@@ -1,36 +1,37 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:c="using:scoreboard2.Controls">
+        xmlns:c="using:scoreboard2.Controls"
+        xmlns:baseball="using:scoreboard2.Controls.Baseball">
     <Design.PreviewWith>
-        <c:InningControl />
+        <baseball:InningControl />
     </Design.PreviewWith>
     
-    <Style Selector="c|InningControl /template/ :is(Button)[Tag=Modify]">
+    <Style Selector="baseball|InningControl /template/ :is(Button)[Tag=Modify]">
         <Setter Property="Command" Value="{Binding ButtonClickFunction, RelativeSource={RelativeSource TemplatedParent}}"/>
         <Setter Property="CommandParameter" Value="{Binding $self.Content}"/>
     </Style>
     
-    <Style Selector="c|InningControl /template/ :is(Button)[Content=Commit]">
-        <Setter Property="Command" Value="{Binding Inning.Commit, RelativeSource={RelativeSource TemplatedParent}}"/>
-    </Style>
+    <!-- <Style Selector="baseball|InningControl /template/ :is(Button)[Content=Commit]"> -->
+    <!--     <Setter Property="Command" Value="{Binding Inning.Commit, RelativeSource={RelativeSource TemplatedParent}}"/> -->
+    <!-- </Style> -->
 
-    <Style Selector="c|InningControl">
+    <Style Selector="baseball|InningControl">
         <!-- Set Defaults -->
         <Setter Property="Template">
             <ControlTemplate>
                 <c:ConfigEnclosureControl Title="INNING">
                     <c:ConfigEnclosureControl.Value>
-                        <Label Content="{Binding Inning.Value, RelativeSource={RelativeSource TemplatedParent}}" />
+                        <Label Content="{Binding Inning.InningString, RelativeSource={RelativeSource TemplatedParent}}" />
                     </c:ConfigEnclosureControl.Value>
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <Button Tag="Modify">-1</Button>
-                            <TextBox Name="EditValueBox">1</TextBox>
+                            <TextBox Name="EditValueBox" Text="{Binding Inning.Value, RelativeSource={RelativeSource TemplatedParent}}" />
                             <Button Tag="Modify">+1</Button>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Button CommandParameter="{Binding #EditValueBox.Text}">Commit</Button>
-                        </StackPanel>
+                        <!-- <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"> -->
+                        <!--     <Button CommandParameter="{Binding #EditValueBox.Text}">Commit</Button> -->
+                        <!-- </StackPanel> -->
                     </StackPanel>
                 </c:ConfigEnclosureControl>
             </ControlTemplate>

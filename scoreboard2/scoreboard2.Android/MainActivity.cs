@@ -2,12 +2,11 @@
 using Android.Content.PM;
 using Avalonia;
 using Avalonia.Android;
-using Avalonia.ReactiveUI;
 
 namespace scoreboard2.Android;
 
 [Activity(
-    Label = "scoreboard2.Android",
+    Label = "scoreboard2",
     Theme = "@style/MyTheme.NoActionBar",
     Icon = "@drawable/icon",
     MainLauncher = true,
@@ -17,7 +16,6 @@ public class MainActivity : AvaloniaMainActivity<App>
     protected override AppBuilder CustomizeAppBuilder(AppBuilder builder)
     {
         return base.CustomizeAppBuilder(builder)
-            .WithInterFont()
-            .UseReactiveUI();
+            .WithInterFont();
     }
 }

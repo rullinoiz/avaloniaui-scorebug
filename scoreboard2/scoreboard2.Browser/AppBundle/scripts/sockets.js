@@ -1,8 +1,9 @@
-const { getAssemblyExports } = await globalThis.getDotnetRuntime(0);
-let exports = await getAssemblyExports("scoreboard2.dll");
-let ReplicatorService = exports.scoreboard2.RemoteControl.ReplicatorService;
+// WASM doesn't support System.Net.Sockets (which is what WebSocketSharp relies on) and i don't want to go through the
+// work of using System.Net.WebSockets which is much too verbose for something as simple as an echo chamber
 
-// console.log(exports.scoreboard2.RemoteControl.ReplicatorService.GetStringFromDotnet());
+const { getAssemblyExports } = await globalThis.getDotnetRuntime(0);
+const exports = await getAssemblyExports("scoreboard2.dll");
+const Shim = exports.scoreboard2.RemoteControl.WebSocketShim;
 
 let socket = null;
 
@@ -12,15 +13,15 @@ export function SetupWebsocket(url) {
 
     socket = new WebSocket(url);
     socket.addEventListener("message", (data) => {
-        ReplicatorService.SocketOnMessage(data.data.toString());
+        Shim.SocketOnMessage(data.data.toString());
     });
 
     socket.addEventListener("open", (_) => {
-        ReplicatorService.SocketOnOpen();
+        Shim.SocketOnOpen();
     });
 
     socket.addEventListener("close", (_) => {
-        ReplicatorService.SocketOnClose();
+        Shim.SocketOnClose();
     });
 }
 

@@ -29,12 +29,14 @@
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <Button Tag="Modify">-1</Button>
-                            <TextBox Name="EditValueBox">0</TextBox>
+                            <TextBox Name="EditValueBox" HorizontalContentAlignment="Center">0</TextBox>
                             <Button Tag="Modify">+1</Button>
                             <Button Tag="Modify">+2</Button>
                             <Button Tag="Modify">+3</Button>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="5">
+                            <Button Content="Reset" HorizontalAlignment="Center" 
+                                    Command="{Binding ResetClickFunction, RelativeSource={RelativeSource TemplatedParent}}" />
                             <Button CommandParameter="{Binding #EditValueBox.Text}">Commit</Button>
                             <Button>Undo</Button>
                         </StackPanel>

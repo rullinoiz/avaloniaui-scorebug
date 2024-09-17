@@ -1,0 +1,16 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:scoreboard2.Controls.Football">
+    <Design.PreviewWith>
+        <controls:QuarterControl />
+    </Design.PreviewWith>
+
+    <Style Selector="controls|QuarterControl">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <TextBlock Text="Templated Control" />
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

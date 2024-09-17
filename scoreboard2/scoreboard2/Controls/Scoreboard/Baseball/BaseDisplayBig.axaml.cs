@@ -34,13 +34,17 @@ public class BaseDisplayBig : TemplatedControl
         _base2 = e.NameScope.Find<Rectangle>(name: "Base2");
         _base3 = e.NameScope.Find<Rectangle>(name: "Base3");
 
-        Base.PropertyChanged += (_, _) =>
+        Base.Base1.PropertyChanged += (_, _) =>
         {
-            // if (args.PropertyName != nameof(Base.BaseStates)) return;
-
-            _base1!.Fill = Base.BaseStates[0] ? OnColor : OffColor;
-            _base2!.Fill = Base.BaseStates[1] ? OnColor : OffColor;
-            _base3!.Fill = Base.BaseStates[2] ? OnColor : OffColor;
+            _base1!.Fill = Base.Base1.State ? OnColor : OffColor;
+        };
+        Base.Base2.PropertyChanged += (_, _) =>
+        {
+            _base2!.Fill = Base.Base2.State ? OnColor : OffColor;
+        };
+        Base.Base3.PropertyChanged += (_, _) =>
+        {
+            _base3!.Fill = Base.Base3.State ? OnColor : OffColor;
         };
     }
 }

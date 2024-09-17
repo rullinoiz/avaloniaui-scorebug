@@ -18,7 +18,8 @@
                     <c:ConfigEnclosureControl.Value>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="4">
                             <Button Tag="Modify">-1</Button>
-                            <Label FontFamily="{StaticResource RubikFont}" VerticalAlignment="Center" Content="{Binding Value.Value, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <Label FontFamily="{StaticResource RubikFont}" VerticalAlignment="Center" 
+                                   Content="{Binding Value.Value, RelativeSource={RelativeSource TemplatedParent}}" />
                             <Button Tag="Modify">+1</Button>
                         </StackPanel>
                     </c:ConfigEnclosureControl.Value>

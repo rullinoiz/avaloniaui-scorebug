@@ -2,8 +2,9 @@ using System;
 using System.ComponentModel;
 using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
+using scoreboard2.RemoteControl.Attributes;
 
-namespace scoreboard2.Models;
+namespace scoreboard2.Models.Baseball;
 
 #pragma warning disable CS0660
 #pragma warning disable CS0661
@@ -41,12 +42,16 @@ public class Inning : ObservableObject
     // ReSharper disable once UnusedAutoPropertyAccessor.Global
     public string Name { get; }
 
+    [ReplicatorIgnore]
     public int InningNum => _inningNum;
     
-    public string InningString => $"{InningNum}{GetSuffix()}";
+    [ReplicatorIgnore]
+    public string InningString => ToString();
 
+    [ReplicatorIgnore]
     public string PeriodString => $"{Value}{Suffixes.GetValue(_value - 1) ?? Suffixes.Last()}";
-
+    
+    [ReplicatorIgnore]
     public InningType TopOrBottom => Value % 2;
     
     // override Value so InningNum is also updated
@@ -81,11 +86,6 @@ public class Inning : ObservableObject
     protected override void OnPropertyChanged(PropertyChangedEventArgs args)
     {
         base.OnPropertyChanged(args);
-    }
-
-    public void Commit(int value)
-    {
-        Value = value;
     }
     
     public Inning(string name = "INNING")
