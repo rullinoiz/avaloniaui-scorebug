@@ -3,7 +3,7 @@
 
 const { getAssemblyExports } = await globalThis.getDotnetRuntime(0);
 const exports = await getAssemblyExports("scoreboard2.dll");
-const Shim = exports.scoreboard2.RemoteControl.WebSocketShim;
+const Shim = exports.scoreboard2.RemoteControl.WebSocketPlatform.WebSocketShimJS;
 
 let socket = null;
 

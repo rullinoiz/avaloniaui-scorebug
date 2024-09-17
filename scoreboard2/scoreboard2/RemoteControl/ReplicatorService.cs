@@ -138,8 +138,8 @@ public partial class ReplicatorService
     public void SocketOnMessage(object? _, string raw)
     {
         Console.WriteLine("new data => " + raw);
-        if (JsonConvert.DeserializeObject<ReplicatorMessage>(raw) is not var (replicatorSignal, data)) return;
-        if (replicatorSignal == ReplicatorSignal.Sync) return;
+        if (JsonConvert.DeserializeObject<ReplicatorMessage>(raw) is not var (signal, data)) return;
+        if (signal == ReplicatorSignal.Sync) return;
 
         foreach (var property in data!)
         {
@@ -159,6 +159,11 @@ public partial class ReplicatorService
                 case { } t when t == typeof(Avalonia.Media.Imaging.Bitmap):
                     return;
                 default:
+                    if (propertyInfo.PropertyType == property.Value.GetType())
+                    {
+                        val = property.Value;
+                        break;
+                    }
                     Console.WriteLine("using built in converter");
                     val = ((JObject)property.Value).ToObject(propertyInfo.PropertyType);
                     break;
