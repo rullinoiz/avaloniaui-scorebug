@@ -4,8 +4,8 @@
         xmlns:football="using:scoreboard2.Controls.Football">
     
     <Design.PreviewWith>
-        <Border BorderBrush="White" BorderThickness="1" Width="400" Height="200">
-            <football:DownsAndYards2Go Down="1" Yards="10" />
+        <Border BorderBrush="White" BorderThickness="1" Width="400" Height="100">
+            <football:DownsAndYards2Go />
         </Border>
     </Design.PreviewWith>
     
@@ -26,25 +26,28 @@
             <ControlTemplate>
                 <controls:ConfigEnclosureControl Title="DOWNS N' YARDS">
                     <controls:ConfigEnclosureControl.Value>
-                        <TextBlock Text="{TemplateBinding Output}" />
+                        <TextBlock Text="{Binding DownAndYards.Output, RelativeSource={RelativeSource TemplatedParent}}" />
                     </controls:ConfigEnclosureControl.Value>
                     
                     <Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto, Auto" VerticalAlignment="Top">
                         <Label Grid.Column="0" Grid.Row="0" Content="DOWN" />
-                        <StackPanel x:Name="DownStackPanel" Grid.Column="1" Grid.Row="0" Orientation="Horizontal" Spacing="5">
+                        <StackPanel x:Name="DownStackPanel" Grid.Column="1" Grid.Row="0" Orientation="Horizontal" Spacing="5" HorizontalAlignment="Right">
                             <Button x:Name="Reset" Content="Reset" />
                             <Button Tag="-1" Content="-" />
-                            <Label Content="{Binding Down.Value, RelativeSource={RelativeSource TemplatedParent}}" 
+                            <Label Content="{Binding DownAndYards.Down, RelativeSource={RelativeSource TemplatedParent}}" 
                                    VerticalAlignment="Center" />
                             <Button Tag="+1"  Content="+" />
                         </StackPanel>
                         
                         <Label Grid.Column="0" Grid.Row="1" Content="YARDS" />
-                        <StackPanel x:Name="YardsStackPanel" Grid.Column="1" Grid.Row="1" 
+                        <StackPanel x:Name="YardsStackPanel" Grid.Column="1" Grid.Row="1" Spacing="5"
                                     Orientation="Horizontal" HorizontalAlignment="Right">
-                            <TextBox x:Name="YardsTextBox" 
-                                     Text="{Binding Yards.Value, RelativeSource={RelativeSource TemplatedParent}}" 
-                                     VerticalAlignment="Center" HorizontalContentAlignment="Center" />
+                            <ToggleButton x:Name="LongButton" Content="LONG" 
+                                          IsChecked="{Binding DownAndYards.Long, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <ToggleButton x:Name="GoalButton" Content="GOAL" 
+                                          IsChecked="{Binding DownAndYards.Goal, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <TextBox x:Name="YardsTextBox" VerticalAlignment="Center" HorizontalContentAlignment="Center"
+                                     Watermark="{Binding DownAndYards.Yards, RelativeSource={RelativeSource TemplatedParent}}" />
                         </StackPanel>
                     </Grid>
                 </controls:ConfigEnclosureControl>

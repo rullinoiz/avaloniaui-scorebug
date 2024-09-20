@@ -32,9 +32,7 @@
                 <c:WrapAroundClickerControl Grid.Column="1" Grid.Row="2"
                                             Value="{Binding Football.Quarter}" Max="4" />
                 <fc:DownsAndYards2Go Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2"
-                                     Down="{Binding Football.Down, Mode=TwoWay}" 
-                                     Yards="{Binding Football.Yards, Mode=TwoWay}" 
-                                     Output="{Binding Football.Output, Mode=TwoWay}" />
+                                     DownAndYards="{Binding Football.DownAndYards}" />
             </Grid>
         </ScrollViewer>
     </StackPanel>

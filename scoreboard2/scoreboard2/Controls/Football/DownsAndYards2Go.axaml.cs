@@ -1,67 +1,63 @@
 using System.ComponentModel;
 using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
+using Avalonia.Input;
 using scoreboard2.Converters;
 using scoreboard2.Models.Common;
+using scoreboard2.Models.Football;
 
 namespace scoreboard2.Controls.Football;
 
 public class DownsAndYards2Go : TemplatedControl
 {
-    public static readonly StyledProperty<TemporaryNamedValue> DownProperty = AvaloniaProperty.Register<DownsAndYards2Go, TemporaryNamedValue>(
-        "Down");
+    public static readonly StyledProperty<DownAndYards?> DownAndYardsProperty = AvaloniaProperty.Register<DownsAndYards2Go, DownAndYards?>(
+        "DownAndYards");
 
-    public TemporaryNamedValue Down
+    public DownAndYards? DownAndYards
     {
-        get => GetValue(DownProperty);
-        set => SetValue(DownProperty, value);
+        get => GetValue(DownAndYardsProperty);
+        set => SetValue(DownAndYardsProperty, value);
     }
+    
+#nullable disable
+    private TextBox _editTextBox;
+#nullable enable
 
-    public static readonly StyledProperty<TemporaryNamedValue> YardsProperty = AvaloniaProperty.Register<DownsAndYards2Go, TemporaryNamedValue>(
-        "Yards");
-
-    public TemporaryNamedValue Yards
-    {
-        get => GetValue(YardsProperty);
-        set => SetValue(YardsProperty, value);
-    }
-
-    public static readonly StyledProperty<string> OutputProperty = AvaloniaProperty.Register<DownsAndYards2Go, string>(
-        "Output");
-
-    public string Output
-    {
-        get => GetValue(OutputProperty);
-        private set => SetValue(OutputProperty, value);
-    }
-
-    public static readonly StyledProperty<bool> HiddenProperty = AvaloniaProperty.Register<DownsAndYards2Go, bool>(
-        "Hidden");
-
-    public bool Hidden
-    {
-        get => GetValue(HiddenProperty);
-        set => SetValue(HiddenProperty, value);
-    }
-
-    public void DownModify(int value) => Down.Value += value;
+    public void DownModify(int value) => DownAndYards!.Down += value;
 
     public void Reset()
     {
-        Yards.Clear();
-        Down.Value = 0;
+        DownAndYards!.Yards = 10;
+        DownAndYards!.Down = 0;
     }
 
-    public void OnPropertyChanged(object? o, PropertyChangedEventArgs args)
+    private void ConfirmYards(string text)
     {
-        Output = Down.Value <= 0 ? "" : $"{StringTercer.Convert(Down.Value)} & {Yards.Value}";
+        try
+        {
+            DownAndYards!.Yards = int.Parse(text);
+        }
+        catch (System.FormatException)
+        {
+            DownAndYards!.Yards = 0;
+        }
     }
-    
+
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);
 
-        Down.PropertyChanged += OnPropertyChanged;
-        Yards.PropertyChanged += OnPropertyChanged;
+        DownAndYards ??= new DownAndYards();
+
+        _editTextBox = e.NameScope.Get<TextBox>(name: "YardsTextBox");
+        _editTextBox.KeyDown += (_, args) =>
+        {
+            if (args.Key != Key.Enter) return;
+            ConfirmYards(_editTextBox.Text ?? "0");
+            DownAndYards.Long = false;
+            DownAndYards.Goal = false;
+        };
+        _editTextBox.LostFocus += (_, _) => { _editTextBox.Text = DownAndYards!.Yards.ToString(); };
     }
 }
