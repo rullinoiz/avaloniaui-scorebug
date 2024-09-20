@@ -1,10 +1,7 @@
-using System.ComponentModel;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
-using scoreboard2.Converters;
-using scoreboard2.Models.Common;
 using scoreboard2.Models.Football;
 
 namespace scoreboard2.Controls.Football;
