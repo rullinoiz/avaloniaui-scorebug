@@ -19,6 +19,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\scoreboard2\scoreboard2.csproj"/>
+        <ProjectReference Include="..\scoreboard2\scoreboard2.csproj" 
+                          ReferenceOutputAssembly="true"
+                          SetTargetFramework="TargetFramework=net8.0"/>
     </ItemGroup>
 </Project>

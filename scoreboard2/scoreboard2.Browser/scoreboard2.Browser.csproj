@@ -4,6 +4,8 @@
         <RuntimeIdentifier>browser-wasm</RuntimeIdentifier>
         <WasmMainJSPath>AppBundle\main.js</WasmMainJSPath>
         <OutputType>Exe</OutputType>
+        <DeleteExistingFiles>true</DeleteExistingFiles>
+        
     </PropertyGroup>
 
     <ItemGroup>
@@ -15,6 +17,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\scoreboard2\scoreboard2.csproj" />
+        <ProjectReference Include="..\scoreboard2\scoreboard2.csproj"
+                          ReferenceOutputAssembly="true"
+                          SetTargetFramework="TargetFramework=net8.0-browser" />
     </ItemGroup>
 </Project>
