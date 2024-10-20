@@ -1,0 +1,38 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:c="using:scoreboard2.Controls">
+    <Design.PreviewWith>
+        <c:ReplicatorConfigControl />
+    </Design.PreviewWith>
+
+    <Style Selector="c|ReplicatorConfigControl">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <c:ConfigEnclosureControl Title="REPLICATOR URL">
+                    <c:ConfigEnclosureControl.Value>
+                        <Label Content="{Binding Shim.Connected, RelativeSource={RelativeSource TemplatedParent}}" />
+                    </c:ConfigEnclosureControl.Value>
+            
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                        <TextBox HorizontalAlignment="Stretch" 
+                                 IsEnabled="{Binding !Shim.Connected, RelativeSource={RelativeSource TemplatedParent}}" 
+                                 Text="{TemplateBinding ReplicatorUrl, Mode=TwoWay}" />
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button Content="Connect" 
+                                    IsEnabled="{Binding !Shim.Connected, RelativeSource={RelativeSource TemplatedParent}}"
+                                    Command="{Binding Shim.ConfigureSocket, RelativeSource={RelativeSource TemplatedParent}}"
+                                    CommandParameter="{TemplateBinding ReplicatorUrl}" />
+                            <!-- <Button Content="Sync"  -->
+                            <!--         IsEnabled="{Binding Shim.Connected, Source={x:Static r:ReplicatorService.Instance}}"  -->
+                            <!--         Command="{Binding Close, Source={x:Static r:ReplicatorService.Instance}}" /> -->
+                            <Button Content="Disconnect" 
+                                    IsEnabled="{Binding Shim.Connected, RelativeSource={RelativeSource TemplatedParent}}" 
+                                    Command="{Binding Shim.Close, RelativeSource={RelativeSource TemplatedParent}}" />
+                        </StackPanel>
+                    </StackPanel>
+                </c:ConfigEnclosureControl>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

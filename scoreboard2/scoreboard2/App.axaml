@@ -28,6 +28,8 @@
         <StyleInclude Source="avares://scoreboard2/Controls/Scoreboard/Baseball/BaseDisplayBig.axaml" />
         <StyleInclude Source="avares://scoreboard2/Controls/Scoreboard/Football/LogoNameScoreTimeoutDisplayLandscape.axaml" />
         <StyleInclude Source="avares://scoreboard2/Controls/QuickTextControl.axaml" />
+        <StyleInclude Source="avares://scoreboard2/Controls/ReplicatorConfigControl.axaml" />
+        <StyleInclude Source="avares://scoreboard2/Controls/PresetControl.axaml" />
         <StyleInclude Source="avares://scoreboard2/Controls/Scoreboard/BarValueDisplay.axaml" />
         <StyleInclude Source="avares://scoreboard2/Controls/Scoreboard/DotValueDisplaySmall.axaml" />
         

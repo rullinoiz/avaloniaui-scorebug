@@ -1,0 +1,32 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:c="using:scoreboard2.Controls">
+    <Design.PreviewWith>
+        <c:PresetControl />
+    </Design.PreviewWith>
+
+    <Style Selector="c|PresetControl">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <c:ConfigEnclosureControl Title="SAVE / LOAD PRESET">
+                    <!-- <c:ConfigEnclosureControl.Value> -->
+                    <!--     <Label Content="{Binding Shim.Connected, RelativeSource={RelativeSource TemplatedParent}}" /> -->
+                    <!-- </c:ConfigEnclosureControl.Value> -->
+            
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button Content="Save" 
+                                    Command="{Binding SaveClickButton, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <!-- <Button Content="Sync"  -->
+                            <!--         IsEnabled="{Binding Shim.Connected, Source={x:Static r:ReplicatorService.Instance}}"  -->
+                            <!--         Command="{Binding Close, Source={x:Static r:ReplicatorService.Instance}}" /> -->
+                            <Button Content="Load" 
+                                    Command="{Binding LoadClickButton, RelativeSource={RelativeSource TemplatedParent}}" />
+                        </StackPanel>
+                    </StackPanel>
+                </c:ConfigEnclosureControl>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

@@ -9,43 +9,35 @@
              x:Class="scoreboard2.Views.ScorebugConfigView"
              x:DataType="vm:MainViewModel">
     
-    <Grid Margin="5" ColumnDefinitions="*, *" RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto">
-        <c:QuickImageControl Grid.Column="0" Grid.Row="0" Title="HOME IMAGE" Image="{Binding BaseGame.Settings.HomeImage, Mode=TwoWay}" />
-        <c:QuickImageControl Grid.Column="1" Grid.Row="0" Title="AWAY IMAGE" Image="{Binding BaseGame.Settings.AwayImage, Mode=TwoWay}" />
+    <Grid Margin="5" ColumnDefinitions="*, *" RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto">
+        <c:QuickImageControl Grid.Column="0" Grid.Row="0" Title="HOME IMAGE" 
+                             Image="{Binding BaseGame.Settings.HomeImage, Mode=TwoWay}" />
+        <c:QuickImageControl Grid.Column="1" Grid.Row="0" Title="AWAY IMAGE" 
+                             Image="{Binding BaseGame.Settings.AwayImage, Mode=TwoWay}" />
         
-        <c:QuickColorControl Grid.Column="0" Grid.Row="1" Title="HOME BG" Color="{Binding BaseGame.Settings.HomeBackgroundColor, Mode=TwoWay}" />
-        <c:QuickColorControl Grid.Column="1" Grid.Row="1" Title="AWAY BG" Color="{Binding BaseGame.Settings.AwayBackgroundColor, Mode=TwoWay}" />
-        <c:QuickColorControl Grid.Column="0" Grid.Row="2" Title="HOME FG" Color="{Binding BaseGame.Settings.HomeForegroundColor, Mode=TwoWay}" />
-        <c:QuickColorControl Grid.Column="1" Grid.Row="2" Title="AWAY FG" Color="{Binding BaseGame.Settings.AwayForegroundColor, Mode=TwoWay}" />
-        <c:QuickTextControl Grid.Column="0" Grid.Row="3" Title="HOME CITY" Value="{Binding BaseGame.Settings.HomeCityName, Mode=TwoWay}" />
-        <c:QuickTextControl Grid.Column="1" Grid.Row="3" Title="AWAY CITY" Value="{Binding BaseGame.Settings.AwayCityName, Mode=TwoWay}" />
+        <c:QuickColorControl Grid.Column="0" Grid.Row="1" Title="HOME BG" 
+                             Color="{Binding BaseGame.Settings.HomeBackgroundColor, Mode=TwoWay}" />
+        <c:QuickColorControl Grid.Column="1" Grid.Row="1" Title="AWAY BG" 
+                             Color="{Binding BaseGame.Settings.AwayBackgroundColor, Mode=TwoWay}" />
+        <c:QuickColorControl Grid.Column="0" Grid.Row="2" Title="HOME FG" 
+                             Color="{Binding BaseGame.Settings.HomeForegroundColor, Mode=TwoWay}" />
+        <c:QuickColorControl Grid.Column="1" Grid.Row="2" Title="AWAY FG" 
+                             Color="{Binding BaseGame.Settings.AwayForegroundColor, Mode=TwoWay}" />
+        <c:QuickTextControl Grid.Column="0" Grid.Row="3" Title="HOME CITY" 
+                            Value="{Binding BaseGame.Settings.HomeCityName, Mode=TwoWay}" />
+        <c:QuickTextControl Grid.Column="1" Grid.Row="3" Title="AWAY CITY" 
+                            Value="{Binding BaseGame.Settings.AwayCityName, Mode=TwoWay}" />
         
-        <c:QuickTextControl Grid.Column="0" Grid.Row="4" Title="HOME TEAM" Value="{Binding BaseGame.Settings.HomeTeamName, Mode=TwoWay}" />
-        <c:QuickTextControl Grid.Column="1" Grid.Row="4" Title="AWAY TEAM" Value="{Binding BaseGame.Settings.AwayTeamName, Mode=TwoWay}" />
+        <c:QuickTextControl Grid.Column="0" Grid.Row="4" Title="HOME TEAM" 
+                            Value="{Binding BaseGame.Settings.HomeTeamName, Mode=TwoWay}" />
+        <c:QuickTextControl Grid.Column="1" Grid.Row="4" Title="AWAY TEAM" 
+                            Value="{Binding BaseGame.Settings.AwayTeamName, Mode=TwoWay}" />
         
-        <c:ConfigEnclosureControl Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5" Title="REPLICATOR URL">
-            <c:ConfigEnclosureControl.Value>
-                <Label Content="{Binding Shim.Connected, Source={x:Static r:ReplicatorService.Instance}}" />
-            </c:ConfigEnclosureControl.Value>
-            
-            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Stretch">
-                <TextBox HorizontalAlignment="Stretch" 
-                         IsEnabled="{Binding !Shim.Connected, Source={x:Static r:ReplicatorService.Instance}}" 
-                         Text="{Binding BaseGame.Settings.ReplicatorUrl}" />
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button Content="Connect" 
-                            IsEnabled="{Binding !Shim.Connected, Source={x:Static r:ReplicatorService.Instance}}"
-                            Command="{Binding ConfigureSocket, Source={x:Static r:ReplicatorService.Instance}}"
-                            CommandParameter="{Binding BaseGame.Settings.ReplicatorUrl}" />
-                    <!-- <Button Content="Sync"  -->
-                    <!--         IsEnabled="{Binding Shim.Connected, Source={x:Static r:ReplicatorService.Instance}}"  -->
-                    <!--         Command="{Binding Close, Source={x:Static r:ReplicatorService.Instance}}" /> -->
-                    <Button Content="Disconnect" 
-                            IsEnabled="{Binding Shim.Connected, Source={x:Static r:ReplicatorService.Instance}}" 
-                            Command="{Binding Close, Source={x:Static r:ReplicatorService.Instance}}" />
-                </StackPanel>
-            </StackPanel>
-        </c:ConfigEnclosureControl>
+        <c:PresetControl Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5" GameSettings="{Binding BaseGame.Settings, Mode=TwoWay}" />
+        
+        <c:ReplicatorConfigControl Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="6" 
+                                   Shim="{Binding Shim, Source={x:Static r:ReplicatorService.Instance}}"
+                                   ReplicatorUrl="{Binding BaseGame.Settings.ReplicatorUrl, Mode=TwoWay}"/>
         
     </Grid>
 </UserControl>

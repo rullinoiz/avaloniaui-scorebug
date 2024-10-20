@@ -18,6 +18,8 @@ public partial class ReplicatorService : ObservableObject
 {
     public static ReplicatorService Instance { get; private set; }
     public static ISocketShim Shim { get; }
+    public record RegisteredPropertyInfo(string Path, List<string> Properties);
+    public readonly Dictionary<object, RegisteredPropertyInfo> DebouncePropertyList = [];
 
     static ReplicatorService()
     {
@@ -31,8 +33,6 @@ public partial class ReplicatorService : ObservableObject
     #region private
 
     private object? _viewModel;
-    public record RegisteredPropertyInfo(string Path, List<string> Properties);
-    public readonly Dictionary<object, RegisteredPropertyInfo> DebouncePropertyList = [];
     private readonly string[] _blacklistedProperties = [];
     private object? GetObjectFromPath(string path)
     {
@@ -87,7 +87,6 @@ public partial class ReplicatorService : ObservableObject
         {
             DebouncePropertyList.Add(oo, new RegisteredPropertyInfo(path ?? string.Empty, []));
             oo.PropertyChanged += PropertyChangedInput;
-            Console.WriteLine($"{oo.GetType().Name} is observableobject");
         }
         else
         {
@@ -156,7 +155,7 @@ public partial class ReplicatorService
                 case { } t when t == typeof(int):
                     val = Convert.ToInt32(property.Value);
                     break;
-                case { } t when t == typeof(Avalonia.Media.Imaging.Bitmap):
+                case { } t when t == typeof(Avalonia.Media.Imaging.Bitmap): // don't even try interpreting images
                     return;
                 default:
                     if (propertyInfo.PropertyType == property.Value.GetType())

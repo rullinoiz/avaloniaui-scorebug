@@ -1,4 +1,5 @@
 using System;
+using System.Security.Authentication;
 using CommunityToolkit.Mvvm.ComponentModel;
 using WebSocketSharp;
 
@@ -8,14 +9,23 @@ public partial class WebSocketShimNative : ObservableObject, ISocketShim
 {
     [ObservableProperty] private bool _connected;
 
-    public static readonly WebSocketShimNative Instance = new ();
+    public static readonly WebSocketShimNative Instance = new();
     
     public void ConfigureSocket(string url)
     {
         Connected = false;
         _socket?.Close();
-        _socket = new WebSocket(url);
         Console.WriteLine("now trying to connect to " + url);
+        try
+        {
+            _socket = new WebSocket(url);
+        }
+        catch (Exception e) when (e is ArgumentException or InvalidOperationException)
+        {
+            return; 
+        }
+        _socket.SslConfiguration.EnabledSslProtocols = SslProtocols.Tls12 | SslProtocols.Tls13;
+        _socket.SslConfiguration.CheckCertificateRevocation = false;
 
         _socket.OnMessage += (sender, args) => ReplicatorService.Instance.SocketOnMessage(sender, args.Data);
         _socket.OnOpen += ReplicatorService.SocketOnOpen;
@@ -24,7 +34,12 @@ public partial class WebSocketShimNative : ObservableObject, ISocketShim
         _socket.Connect();
     }
 
-    public void Send(string data) => _socket?.Send(data);
+    public void Send(string data)
+    {
+        if (_socket?.ReadyState == WebSocketState.Open)
+            _socket?.Send(data);
+    }
+
     public void Close() => _socket?.Close();
     
     private WebSocket? _socket;
