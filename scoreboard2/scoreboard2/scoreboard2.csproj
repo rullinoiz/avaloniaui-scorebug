@@ -72,6 +72,5 @@
 
     <ItemGroup>
       <Folder Include="Common\Assets\Fonts\" />
-      <Folder Include="Converters\JsonConverters\" />
     </ItemGroup>
 </Project>

@@ -1,5 +1,4 @@
 using System;
-using System.Drawing.Imaging;
 using System.IO;
 using System.IO.Compression;
 using Avalonia.Media.Imaging;
@@ -7,7 +6,7 @@ using IronSoftware.Drawing;
 using Newtonsoft.Json;
 using scoreboard2.Common.Extensions;
 
-namespace scoreboard2.Converters;
+namespace scoreboard2.Converters.JsonConverters;
 
 public class AvaloniaBitmapJsonConverter : JsonConverter<Bitmap>
 {
