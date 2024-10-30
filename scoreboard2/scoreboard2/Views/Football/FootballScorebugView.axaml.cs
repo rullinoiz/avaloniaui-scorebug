@@ -1,10 +1,12 @@
-using Avalonia.Controls;
+using scoreboard2.Common;
 
 namespace scoreboard2.Views.Football;
 
-public partial class FootballScorebugView : UserControl
+public class FootballScorebugViewMain : FootballScorebugView
 {
-    public FootballScorebugView()
+    public static readonly ScorebugSize Size = new(1000, 75);
+    
+    public FootballScorebugViewMain()
     {
         InitializeComponent();
     }

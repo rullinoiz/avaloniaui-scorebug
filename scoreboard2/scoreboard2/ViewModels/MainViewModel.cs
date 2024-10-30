@@ -5,6 +5,7 @@ using scoreboard2.Models.Baseball;
 using scoreboard2.Models.Football;
 using scoreboard2.RemoteControl.Attributes;
 using scoreboard2.ViewModels.Common;
+using scoreboard2.Common;
 
 #if !(BROWSER || IOS || ANDROID)
 using Avalonia.Controls;
@@ -34,10 +35,10 @@ public partial class MainViewModel : ViewModelBase
 #if !(BROWSER || IOS || ANDROID)
     private readonly Window? _scoreboardWindow;
 #endif
-    private record ScorebugSize(double Width, double Height);
+    
     private readonly ScorebugSize[] _scorebugSizes = [
-        new ScorebugSize(500, 125),
-        new ScorebugSize(1000, 75)
+        new (500, 125),
+        new (1000, 75)
     ];
     
     partial void OnSelectedGameChanged(int value)

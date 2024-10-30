@@ -1,6 +1,7 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:c="using:scoreboard2.Controls">
+        xmlns:c="using:scoreboard2.Controls"
+        xmlns:r="clr-namespace:scoreboard2.RemoteControl">
     <Design.PreviewWith>
         <c:ReplicatorConfigControl />
     </Design.PreviewWith>
@@ -19,13 +20,16 @@
                                  IsEnabled="{Binding !Shim.Connected, RelativeSource={RelativeSource TemplatedParent}}" 
                                  Text="{TemplateBinding ReplicatorUrl, Mode=TwoWay}" />
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <ToggleButton Content="HOST?" 
+                                          IsChecked="{Binding IsHost, Source={x:Static r:ReplicatorService.Instance}}" />
+                            
                             <Button Content="Connect" 
                                     IsEnabled="{Binding !Shim.Connected, RelativeSource={RelativeSource TemplatedParent}}"
                                     Command="{Binding Shim.ConfigureSocket, RelativeSource={RelativeSource TemplatedParent}}"
                                     CommandParameter="{TemplateBinding ReplicatorUrl}" />
-                            <!-- <Button Content="Sync"  -->
-                            <!--         IsEnabled="{Binding Shim.Connected, Source={x:Static r:ReplicatorService.Instance}}"  -->
-                            <!--         Command="{Binding Close, Source={x:Static r:ReplicatorService.Instance}}" /> -->
+                            <Button Content="Sync"
+                                    IsEnabled="{Binding Shim.Connected, Source={x:Static r:ReplicatorService.Instance}}"
+                                    Command="{Binding SyncClickButton, RelativeSource={RelativeSource TemplatedParent}}" />
                             <Button Content="Disconnect" 
                                     IsEnabled="{Binding Shim.Connected, RelativeSource={RelativeSource TemplatedParent}}" 
                                     Command="{Binding Shim.Close, RelativeSource={RelativeSource TemplatedParent}}" />

@@ -14,8 +14,8 @@
     </Design.DataContext>
         
     <Carousel SelectedIndex="{Binding SelectedGame}">
-        <baseball:BaseballScorebugView />
-        <football:FootballScorebugView />
+        <baseball:BaseballScorebugViewMain />
+        <football:FootballScorebugViewMain />
     </Carousel>
     
 </UserControl>

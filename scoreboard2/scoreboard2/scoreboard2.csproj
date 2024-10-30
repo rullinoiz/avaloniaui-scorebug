@@ -44,7 +44,7 @@
         <DependentUpon>BaseballConfigView.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
-      <Compile Update="Views\Baseball\BaseballScorebugView.axaml.cs">
+      <Compile Update="Views\Baseball\BaseballScorebugViewMain.axaml.cs">
         <DependentUpon>BaseballScorebugView.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>

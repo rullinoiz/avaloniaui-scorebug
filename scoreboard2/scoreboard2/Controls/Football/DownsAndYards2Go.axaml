@@ -44,6 +44,8 @@
                                     Orientation="Horizontal" HorizontalAlignment="Right">
                             <ToggleButton x:Name="LongButton" Content="LONG" 
                                           IsChecked="{Binding DownAndYards.Long, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <ToggleButton x:Name="InchesButton" Content="INCHES" 
+                                          IsChecked="{Binding DownAndYards.Inches, RelativeSource={RelativeSource TemplatedParent}}" />
                             <ToggleButton x:Name="GoalButton" Content="GOAL" 
                                           IsChecked="{Binding DownAndYards.Goal, RelativeSource={RelativeSource TemplatedParent}}" />
                             <TextBox x:Name="YardsTextBox" VerticalAlignment="Center" HorizontalContentAlignment="Center"

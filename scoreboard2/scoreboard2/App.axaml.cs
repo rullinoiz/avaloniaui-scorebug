@@ -20,9 +20,6 @@ public class App : Application
         var vm = new MainViewModel();
         ReplicatorService.Instance.RegisterProperties(vm);
         ReplicatorService.Instance.Setup(vm);
-        // ReplicatorService.Instance.DebouncePropertyList.Add(vm.BaseGame.);
-        
-        //ReplicatorService.ConfigureSocket("ws://localhost:25565/replicator");
 
         switch (ApplicationLifetime)
         {
@@ -32,6 +29,7 @@ public class App : Application
                     DataContext = vm
                 };
                 break;
+            // browser implementation (you can't make new windows on browsers apparently)
             case ISingleViewApplicationLifetime singleViewPlatform:
                 singleViewPlatform.MainView = new MainViewBrowser
                 {

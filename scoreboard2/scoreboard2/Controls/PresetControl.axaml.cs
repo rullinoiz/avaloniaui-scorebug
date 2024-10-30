@@ -6,7 +6,6 @@ using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Platform.Storage;
 using Newtonsoft.Json;
-using scoreboard2.Converters;
 using scoreboard2.Converters.JsonConverters;
 using scoreboard2.Models;
 

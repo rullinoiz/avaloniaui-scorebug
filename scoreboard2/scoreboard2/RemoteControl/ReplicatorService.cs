@@ -10,7 +10,6 @@ using Newtonsoft.Json.Linq;
 using scoreboard2.RemoteControl.Attributes;
 using scoreboard2.RemoteControl.Common;
 using scoreboard2.RemoteControl.WebSocketPlatform;
-using WebSocketSharp;
 
 namespace scoreboard2.RemoteControl;
 
@@ -19,7 +18,7 @@ public partial class ReplicatorService : ObservableObject
     public static ReplicatorService Instance { get; private set; }
     public static ISocketShim Shim { get; }
     public record RegisteredPropertyInfo(string Path, List<string> Properties);
-    public readonly Dictionary<object, RegisteredPropertyInfo> DebouncePropertyList = [];
+    private readonly Dictionary<object, RegisteredPropertyInfo> DebouncePropertyList = [];
 
     static ReplicatorService()
     {
@@ -54,11 +53,11 @@ public partial class ReplicatorService : ObservableObject
         => o.GetType().GetProperty(propertyName);
 
     private string Property2String(object o, string propertyName) => DebouncePropertyList.TryGetValue(o, out var info) 
-        ? (info.Path.IsNullOrEmpty() ? propertyName : $"{info.Path}.{propertyName}") : string.Empty;
+        ? (string.IsNullOrEmpty(info.Path) ? propertyName : $"{info.Path}.{propertyName}") : string.Empty;
     #endregion
     private void PropertyChangedInput(object? sender, PropertyChangedEventArgs args)
     {
-        if (_blacklistedProperties.Contains(args.PropertyName)) return;
+        if (_blacklistedProperties.Contains(args.PropertyName) || !Shim.Connected) return;
         
         RegisteredPropertyInfo? info = null;
         if (sender is not null && DebouncePropertyList.TryGetValue(sender, out info) 
@@ -74,7 +73,7 @@ public partial class ReplicatorService : ObservableObject
         Console.WriteLine($"{info?.Path + "." + args.PropertyName} => ({val?.GetType()}) {val}");
 
         if (Property2String(sender!, args.PropertyName!) is not { } fullPath || val is null) return;
-        var data = new ReplicatorMessage(ReplicatorSignal.Change, new ReplicatorEntries { {fullPath, val} });
+        var data = new ReplicatorMessage("sendMessage", ReplicatorSignal.Change, new ReplicatorEntries { {fullPath, val} });
         var serializedData = JsonConvert.SerializeObject(data);
         Send(serializedData);
     }
@@ -117,6 +116,8 @@ public partial class ReplicatorService : ObservableObject
 
 public partial class ReplicatorService
 {
+    [ObservableProperty] private bool _isHost;
+    
     public void ConfigureSocket(string url) => Shim.ConfigureSocket(url);
 
     public void Send(string data) => Shim.Send(data);
@@ -124,21 +125,27 @@ public partial class ReplicatorService
     
     public static void SocketOnOpen(object? _ = null, EventArgs? args = null)
     {
-        Console.WriteLine("now connected " + args);
+        Console.WriteLine("now connected");
         Shim.Connected = true;
     }
 
     public static void SocketOnClose(object? _ = null, EventArgs? args = null)
     {
-        Console.WriteLine("now disconnected " + args);
+        Console.WriteLine("now disconnected");
         Shim.Connected = false;
     }
     
     public void SocketOnMessage(object? _, string raw)
     {
         Console.WriteLine("new data => " + raw);
-        if (JsonConvert.DeserializeObject<ReplicatorMessage>(raw) is not var (signal, data)) return;
-        if (signal == ReplicatorSignal.Sync) return;
+        if (JsonConvert.DeserializeObject<ReplicatorMessage>(raw) is not var (_, signal, data)) return;
+        if (signal == ReplicatorSignal.Sync)
+        {
+            SocketOnSync();
+            return;
+        }
+        
+        if (signal != ReplicatorSignal.Change) return;
 
         foreach (var property in data!)
         {
@@ -163,7 +170,6 @@ public partial class ReplicatorService
                         val = property.Value;
                         break;
                     }
-                    Console.WriteLine("using built in converter");
                     val = ((JObject)property.Value).ToObject(propertyInfo.PropertyType);
                     break;
             }
@@ -171,5 +177,25 @@ public partial class ReplicatorService
                 () => { try { propertyInfo.SetValue(o, val ?? property.Value); } catch (ArgumentException) { } }
             );
         }
+    }
+
+    private void SocketOnSync()
+    {
+        if (!IsHost) return;
+        
+        var entries = new ReplicatorEntries();
+
+        foreach (var (o, (_, _)) in DebouncePropertyList)
+        {
+            foreach (var property in o.GetType().GetProperties())
+            {
+                if (property.GetCustomAttribute<ReplicatorIgnoreAttribute>() is not null) continue;
+                if (property.GetValue(o)?.GetType().GetCustomAttribute<ReplicatorSyncIgnoreAttribute>() is not null) continue;
+                
+                entries.Add(Property2String(o, property.Name), property.GetValue(o)!);
+            }
+        }
+        
+        Shim.Send(JsonConvert.SerializeObject(new ReplicatorMessage("sendMessage", ReplicatorSignal.Change, entries)));
     }
 }

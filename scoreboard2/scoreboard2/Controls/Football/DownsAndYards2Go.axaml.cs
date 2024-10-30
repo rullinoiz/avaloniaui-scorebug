@@ -25,8 +25,14 @@ public class DownsAndYards2Go : TemplatedControl
 
     public void Reset()
     {
-        DownAndYards!.Yards = 10;
-        DownAndYards!.Down = 0;
+        if (DownAndYards is null) return;
+        
+        DownAndYards.Inches = false;
+        DownAndYards.Goal = false;
+        DownAndYards.Long = false;
+            
+        DownAndYards.Yards = 10;
+        DownAndYards.Down = 1;
     }
 
     private void ConfirmYards(string text)
@@ -54,6 +60,7 @@ public class DownsAndYards2Go : TemplatedControl
             ConfirmYards(_editTextBox.Text ?? "0");
             DownAndYards.Long = false;
             DownAndYards.Goal = false;
+            DownAndYards.Inches = false;
         };
         _editTextBox.LostFocus += (_, _) => { _editTextBox.Text = DownAndYards!.Yards.ToString(); };
     }

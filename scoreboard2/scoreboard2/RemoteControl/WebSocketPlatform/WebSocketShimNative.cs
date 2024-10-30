@@ -5,13 +5,13 @@ using WebSocketSharp;
 
 namespace scoreboard2.RemoteControl.WebSocketPlatform;
 
-public partial class WebSocketShimNative : ObservableObject, ISocketShim
+public sealed partial class WebSocketShimNative : ObservableObject, ISocketShim
 {
     [ObservableProperty] private bool _connected;
 
     public static readonly WebSocketShimNative Instance = new();
     
-    public void ConfigureSocket(string url)
+    void ISocketShim.ConfigureSocket(string url)
     {
         Connected = false;
         _socket?.Close();
@@ -34,13 +34,15 @@ public partial class WebSocketShimNative : ObservableObject, ISocketShim
         _socket.Connect();
     }
 
-    public void Send(string data)
+    void ISocketShim.Send(string data)
     {
         if (_socket?.ReadyState == WebSocketState.Open)
+        {
             _socket?.Send(data);
+        }
     }
 
-    public void Close() => _socket?.Close();
+    void ISocketShim.Close() => _socket?.Close();
     
     private WebSocket? _socket;
     private WebSocketShimNative() { }

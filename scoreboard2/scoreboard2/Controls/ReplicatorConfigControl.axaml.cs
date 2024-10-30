@@ -1,5 +1,9 @@
+using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls.Primitives;
+using Newtonsoft.Json;
+using scoreboard2.RemoteControl;
+using scoreboard2.RemoteControl.Common;
 using scoreboard2.RemoteControl.WebSocketPlatform;
 
 namespace scoreboard2.Controls;
@@ -22,5 +26,12 @@ public class ReplicatorConfigControl : TemplatedControl
     {
         get => GetValue(ReplicatorUrlProperty);
         set => SetValue(ReplicatorUrlProperty, value);
+    }
+
+    public Task SyncClickButton()
+    {
+        var message = new ReplicatorMessage("sendMessage", ReplicatorSignal.Sync);
+        ReplicatorService.Instance.Send(JsonConvert.SerializeObject(message));
+        return Task.CompletedTask;
     }
 }

@@ -8,7 +8,7 @@
              xmlns:baseball="clr-namespace:scoreboard2.Controls.Scoreboard.Baseball"
              mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="125"
              x:DataType="vm:MainViewModel"
-             x:Class="scoreboard2.Views.Baseball.BaseballScorebugView">
+             x:Class="scoreboard2.Views.Baseball.BaseballScorebugViewMain">
     
     <UserControl.Styles>
         <Style Selector=":is(Label)">
