@@ -4,7 +4,7 @@ using Avalonia.Controls.Primitives;
 using Avalonia.Media;
 using scoreboard2.Models.Baseball;
 
-namespace scoreboard2.Controls;
+namespace scoreboard2.Controls.Baseball;
 
 public class BasePickerControl : TemplatedControl
 {
@@ -17,8 +17,8 @@ public class BasePickerControl : TemplatedControl
         set => SetValue(BaseProperty, value);
     }
     
-    private static readonly IBrush OnColor = new SolidColorBrush(0xffffa709);
-    private static readonly IBrush OffColor = new SolidColorBrush(0xff442d0a);
+    public static IBrush OnColor { get; } = new SolidColorBrush(0xffffa709);
+    public static IBrush OffColor { get; } = new SolidColorBrush(0xff442d0a);
 
     private Button? _base1;
     private Button? _base2;

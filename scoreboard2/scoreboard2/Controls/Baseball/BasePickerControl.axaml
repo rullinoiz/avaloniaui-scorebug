@@ -1,0 +1,44 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:c="using:scoreboard2.Controls"
+        xmlns:baseball="using:scoreboard2.Controls.Baseball">
+    <Design.PreviewWith>
+        <baseball:BasePickerControl Width="200" Height="150" />
+    </Design.PreviewWith>
+    
+    <Style Selector="baseball|BasePickerControl /template/ :is(Button)">
+        <Setter Property="Background" Value="{Binding OffColor, RelativeSource={RelativeSource TemplatedParent}}" />
+        <Setter Property="Width" Value="45" />
+        <Setter Property="Height" Value="45" />
+        <Setter Property="Command" 
+                Value="{Binding ButtonClickFunction, RelativeSource={RelativeSource TemplatedParent}}" />
+        <Setter Property="CommandParameter" Value="{Binding $self.Name}" />
+    </Style>
+    
+    <!-- why does this work -->
+    <Style Selector="baseball|BasePickerControl /template/ Button:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="{Binding $parent[Button].Background}" />
+    </Style>
+
+    <Style Selector="baseball|BasePickerControl">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <c:ConfigEnclosureControl Title=" ">
+                    <Panel HorizontalAlignment="Center">
+                        <StackPanel Orientation="Vertical" Spacing="5" VerticalAlignment="Bottom" HorizontalAlignment="Center" >
+                            <StackPanel.RenderTransform>
+                                <RotateTransform Angle="45" />
+                            </StackPanel.RenderTransform>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="5">
+                                <Button x:Name="Base1" />
+                                <Button x:Name="Base2" />
+                            </StackPanel>
+                            <Button HorizontalAlignment="Left" x:Name="Base3" />
+                        </StackPanel>
+                    </Panel>
+                </c:ConfigEnclosureControl>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

@@ -10,6 +10,7 @@ using Newtonsoft.Json.Linq;
 using scoreboard2.RemoteControl.Attributes;
 using scoreboard2.RemoteControl.Common;
 using scoreboard2.RemoteControl.WebSocketPlatform;
+using scoreboard2.ViewModels;
 
 namespace scoreboard2.RemoteControl;
 
@@ -184,15 +185,22 @@ public partial class ReplicatorService
         if (!IsHost) return;
         
         var entries = new ReplicatorEntries();
-
-        foreach (var (o, (_, _)) in DebouncePropertyList)
+        var alreadySynced = new List<PropertyInfo>();
+    
+        foreach (var (o, (path, _)) in DebouncePropertyList)
         {
             foreach (var property in o.GetType().GetProperties())
             {
                 if (property.GetCustomAttribute<ReplicatorIgnoreAttribute>() is not null) continue;
+                if (property.GetCustomAttribute<ReplicatorSyncIgnoreAttribute>() is not null) continue;
                 if (property.GetValue(o)?.GetType().GetCustomAttribute<ReplicatorSyncIgnoreAttribute>() is not null) continue;
                 
-                entries.Add(Property2String(o, property.Name), property.GetValue(o)!);
+                if (alreadySynced.Exists(item => item == property) 
+                    || (!path.Contains('.') && path != nameof(MainViewModel.SelectedGame))) continue;
+                var propertyValue = property.GetValue(o);
+                
+                alreadySynced.Add(property);
+                entries.Add(Property2String(o, property.Name), propertyValue!);
             }
         }
         

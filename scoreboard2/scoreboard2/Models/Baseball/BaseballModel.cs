@@ -1,4 +1,5 @@
 using scoreboard2.Models.Common;
+using scoreboard2.RemoteControl.Attributes;
 
 namespace scoreboard2.Models.Baseball;
 

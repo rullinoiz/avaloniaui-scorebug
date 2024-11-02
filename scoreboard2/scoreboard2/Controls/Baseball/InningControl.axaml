@@ -26,7 +26,8 @@
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <Button Tag="Modify">-1</Button>
-                            <TextBox Name="EditValueBox" Text="{Binding Inning.Value, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <TextBox x:Name="EditValueBox" HorizontalContentAlignment="Center" 
+                                     Text="{Binding Inning.Value, RelativeSource={RelativeSource TemplatedParent}}" />
                             <Button Tag="Modify">+1</Button>
                         </StackPanel>
                         <!-- <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"> -->

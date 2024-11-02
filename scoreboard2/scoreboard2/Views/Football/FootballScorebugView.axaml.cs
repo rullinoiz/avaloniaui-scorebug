@@ -2,11 +2,9 @@ using scoreboard2.Common;
 
 namespace scoreboard2.Views.Football;
 
-public class FootballScorebugViewMain : FootballScorebugView
+public partial class FootballScorebugViewMain : FootballScorebugViewBase
 {
-    public static readonly ScorebugSize Size = new(1000, 75);
-    
-    public FootballScorebugViewMain()
+    public FootballScorebugViewMain() : base(new ScorebugSize(1000, 75))
     {
         InitializeComponent();
     }

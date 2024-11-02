@@ -15,12 +15,12 @@
     </Design.DataContext>
     
     <StackPanel>
-        <Expander Header="Scorebug Simulator">
-        <Viewbox Stretch="UniformToFill">
-            <views:ScorebugContentView Width="{Binding ScoreboardWidth}" 
-                                       Height="{Binding ScoreboardHeight}" />
-        </Viewbox>
-        </Expander>
+        <!-- <Expander Header="Scorebug Simulator"> -->
+        <!-- <Viewbox Stretch="UniformToFill"> -->
+        <!--     <views:ScorebugContentView Width="{Binding ScoreboardWidth}"  -->
+        <!--                                Height="{Binding ScoreboardHeight}" /> -->
+        <!-- </Viewbox> -->
+        <!-- </Expander> -->
         <TabControl>
             <TabItem Header="Scoreboard Controls">
                 <TabControl SelectedIndex="{Binding SelectedGame}">

@@ -16,7 +16,7 @@
         <StyleInclude Source="avares://scoreboard2/Controls/PeriodControl.axaml" />
         <StyleInclude Source="/Controls/Baseball/InningControl.axaml" />
         <StyleInclude Source="avares://scoreboard2/Controls/ScoreControl.axaml" />
-        <StyleInclude Source="avares://scoreboard2/Controls/BasePickerControl.axaml" />
+        <StyleInclude Source="/Controls/Baseball/BasePickerControl.axaml" />
         <StyleInclude Source="avares://scoreboard2/Controls/WrapAroundClickerControl.axaml" />
         
         <StyleInclude Source="avares://scoreboard2/Controls/QuickNumberControl.axaml" />

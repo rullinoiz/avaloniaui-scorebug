@@ -5,6 +5,7 @@
              xmlns:c="using:scoreboard2.Controls"
              xmlns:vm="using:scoreboard2.ViewModels"
              xmlns:r="using:scoreboard2.RemoteControl"
+             xmlns:views="clr-namespace:scoreboard2.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="scoreboard2.Views.ScorebugConfigView"
              x:DataType="vm:MainViewModel">
@@ -35,7 +36,14 @@
         
         <c:PresetControl Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5" GameSettings="{Binding BaseGame.Settings, Mode=TwoWay}" />
         
-        <c:ReplicatorConfigControl Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="6" 
+        <c:ConfigEnclosureControl Title="SPAWN WINDOWS" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2">
+            <c:ConfigEnclosureControl.Value>
+                <ComboBox x:Name="StyleDropDownComboBox" />
+            </c:ConfigEnclosureControl.Value>
+            <Button HorizontalAlignment="Center" Content="SPAWN" Command="{Binding $parent[views:ScorebugConfigView].SpawnClickButtonFunction}" />
+        </c:ConfigEnclosureControl>
+        
+        <c:ReplicatorConfigControl Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="7" 
                                    Shim="{Binding Shim, Source={x:Static r:ReplicatorService.Instance}}"
                                    ReplicatorUrl="{Binding BaseGame.Settings.ReplicatorUrl, Mode=TwoWay}"/>
         

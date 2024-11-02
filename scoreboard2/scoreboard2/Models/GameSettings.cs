@@ -1,13 +1,14 @@
-using System;
-using System.ComponentModel;
-using System.Reflection;
-using System.Runtime.Serialization;
 using System.Xml.Serialization;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using CommunityToolkit.Mvvm.ComponentModel;
-using Newtonsoft.Json;
 using scoreboard2.RemoteControl.Attributes;
+
+// using Newtonsoft.Json;
+// using System;
+// using System.ComponentModel;
+// using System.Reflection;
+// using System.Runtime.Serialization;
 
 #pragma warning disable CS0657
 
@@ -58,6 +59,7 @@ public partial class GameSettings : ObservableObject
     
     [ObservableProperty]
     [property: ReplicatorIgnore]
+    [property: ReplicatorSyncIgnore]
     // [property: DefaultValue(string.Empty)]
     // [property: XmlIgnore]
     // [property: JsonIgnore]
@@ -81,34 +83,3 @@ public partial class GameSettings : ObservableObject
         }
     }
 }
-
-// public partial class GameSettings
-// {
-//     public void GetObjectData(SerializationInfo info, StreamingContext context)
-//     {
-//         info.AddValue(nameof(HomeBackgroundColor), HomeBackgroundColor);
-//         info.AddValue(nameof(HomeForegroundColor), HomeForegroundColor);
-//         info.AddValue(nameof(HomeCityName), HomeCityName);
-//         info.AddValue(nameof(HomeTeamName), HomeTeamName);
-//         
-//         info.AddValue(nameof(AwayBackgroundColor), AwayBackgroundColor);
-//         info.AddValue(nameof(AwayForegroundColor), AwayForegroundColor);
-//         info.AddValue(nameof(AwayCityName), AwayCityName);
-//         info.AddValue(nameof(AwayTeamName), AwayTeamName);
-//     }
-//
-//     public GameSettings(SerializationInfo info, StreamingContext context)
-//     {
-//         HomeBackgroundColor = (Color)info.GetValue(nameof(HomeBackgroundColor), typeof(Color))!;
-//         HomeForegroundColor = (Color)info.GetValue(nameof(HomeForegroundColor), typeof(Color))!;
-//         HomeCityName = (string)info.GetValue(nameof(HomeCityName), typeof(string))!;
-//         HomeTeamName = (string)info.GetValue(nameof(HomeTeamName), typeof(string))!;
-//         
-//         AwayBackgroundColor = (Color)info.GetValue(nameof(AwayBackgroundColor), typeof(Color))!;
-//         AwayForegroundColor = (Color)info.GetValue(nameof(AwayForegroundColor), typeof(Color))!;
-//         AwayCityName = (string)info.GetValue(nameof(AwayCityName), typeof(string))!;
-//         AwayTeamName = (string)info.GetValue(nameof(AwayTeamName), typeof(string))!;
-//     }
-//     
-//     public GameSettings() { }
-// }

@@ -2,11 +2,9 @@ using scoreboard2.Common;
 
 namespace scoreboard2.Views.Baseball;
 
-public partial class BaseballScorebugViewMain : BaseballScorebugView
+public partial class BaseballScorebugViewMain : BaseballScorebugViewBase
 {
-    public static readonly ScorebugSize Size = new(500, 125);
-    
-    public BaseballScorebugViewMain()
+    public BaseballScorebugViewMain() : base(new ScorebugSize(500, 125))
     {
         InitializeComponent();
     }

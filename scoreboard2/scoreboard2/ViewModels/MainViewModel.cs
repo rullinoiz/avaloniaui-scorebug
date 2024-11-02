@@ -3,16 +3,13 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using scoreboard2.Models;
 using scoreboard2.Models.Baseball;
 using scoreboard2.Models.Football;
-using scoreboard2.RemoteControl.Attributes;
 using scoreboard2.ViewModels.Common;
-using scoreboard2.Common;
 
 #if !(BROWSER || IOS || ANDROID)
-using Avalonia.Controls;
 using scoreboard2.Windows;
+using scoreboard2.Common;
+using System.Collections.Generic;
 #endif
-
-#pragma warning disable CS0657
 
 namespace scoreboard2.ViewModels;
 
@@ -24,31 +21,32 @@ public partial class MainViewModel : ViewModelBase
     
     [ObservableProperty] private int _selectedGame;
     
-    [ObservableProperty] 
-    [property: ReplicatorIgnore]
-    private double _scoreboardWidth;
-    
-    [ObservableProperty] 
-    [property: ReplicatorIgnore]
-    private double _scoreboardHeight;
-    
 #if !(BROWSER || IOS || ANDROID)
-    private readonly Window? _scoreboardWindow;
+    private readonly List<ScoreboardWindow> _scoreboardWindows = [];
 #endif
-    
-    private readonly ScorebugSize[] _scorebugSizes = [
-        new (500, 125),
-        new (1000, 75)
-    ];
+
+#if !(BROWSER || IOS || ANDROID)
+    public void AddNewScorebugView(IScorebugView view)
+    {
+        var window = new ScoreboardWindow(this, view);
+        _scoreboardWindows.Add(window);
+        window.Closed += (_, _) =>
+        {
+            _scoreboardWindows.Remove(window);
+        };
+        window.Show();
+    }
+#endif
     
     partial void OnSelectedGameChanged(int value)
     {
-        var size = _scorebugSizes[value];
-        ScoreboardWidth = size.Width;
-        ScoreboardHeight = size.Height;
+        SelectedGame = value;
 #if !(BROWSER || IOS || ANDROID)
-        _scoreboardWindow!.Width = size.Width;
-        _scoreboardWindow!.Height = size.Height;
+        foreach (var window in _scoreboardWindows.ToArray())
+        {
+            window.Close();
+        }
+        _scoreboardWindows.Clear();
 #endif
     }
     
@@ -57,9 +55,7 @@ public partial class MainViewModel : ViewModelBase
         Console.WriteLine("instantiating main view model");
         
 #if !(BROWSER || IOS || ANDROID)
-        _scoreboardWindow = new ScoreboardWindow(this);
         var scorebugConfig = new ScorebugConfig(this);
-        _scoreboardWindow.Show();
         scorebugConfig.Show();
 #endif
         

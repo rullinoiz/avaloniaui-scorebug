@@ -68,6 +68,10 @@
         <DependentUpon>InningControl.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
+      <Compile Update="Controls\Baseball\BasePickerControl.axaml.cs">
+        <DependentUpon>BasePickerControl.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
     </ItemGroup>
 
     <ItemGroup>
