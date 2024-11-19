@@ -2,7 +2,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:scoreboard2.ViewModels"
+             xmlns:c="using:scoreboard2.Controls"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="vm:MainViewModel"
              x:Class="scoreboard2.Views.Basketball.BasketballConfigView">
-    Welcome to Avalonia!
+    
+    <StackPanel>
+        <ScrollViewer>
+            <Grid Margin="5" ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto">
+                <c:ScoreControl Grid.Column="0" Grid.Row="0" Score="{Binding BaseGame.HomeScore, Mode=TwoWay}" />
+                <c:ScoreControl Grid.Column="1" Grid.Row="0" Score="{Binding BaseGame.AwayScore, Mode=TwoWay}" />
+                <c:WrapAroundClickerControl Grid.Column="0" Grid.Row="1" Value="{Binding Basketball.Quarter}" />
+                <c:ClockControl Grid.Column="1" Grid.Row="1" Clock="{Binding Basketball.QuarterClock}" />
+            </Grid>
+        </ScrollViewer>
+    </StackPanel>
+    
 </UserControl>

@@ -1,6 +1,6 @@
 using scoreboard2.Common;
 
-namespace scoreboard2.Views.Baseball;
+namespace scoreboard2.Views.Baseball.Designs;
 
 public partial class BaseballScorebugViewMain : BaseballScorebugViewBase
 {

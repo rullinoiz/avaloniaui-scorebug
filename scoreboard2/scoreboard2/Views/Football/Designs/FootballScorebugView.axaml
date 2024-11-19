@@ -4,12 +4,23 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:scoreboard2.ViewModels"
              xmlns:converters="using:scoreboard2.Converters"
+             xmlns:football="using:scoreboard2.Controls.Scoreboard.Football"
              mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="75"
-             x:Class="scoreboard2.Views.Football.FootballScorebugViewMain"
-             x:DataType="vm:MainViewModel"
-             xmlns:football="using:scoreboard2.Controls.Scoreboard.Football">
+             x:Class="scoreboard2.Views.Football.Designs.FootballScorebugViewMain"
+             x:DataType="vm:MainViewModel">
     
-    <Grid ColumnDefinitions="375, 375, *, 2*" ShowGridLines="False">
+    <UserControl.Styles>
+        <Style Selector=":is(TextBlock)">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontWeight" Value="ExtraBold" />
+            <Setter Property="FontFamily" Value="{StaticResource InterFont}" />
+        </Style>
+    </UserControl.Styles>
+    
+    <Grid ColumnDefinitions="375, 375, *, 2*" ShowGridLines="True">
         
         <!-- scores -->
         <Border Grid.Column="0" Background="{Binding BaseGame.Settings.HomeBackgroundColor, 
@@ -36,14 +47,10 @@
         </Border>
         
         <!-- quarter -->
-        <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" 
-                   FontSize="20" FontFamily="{StaticResource InterFont}" FontWeight="ExtraBold"
-                   Text="{Binding Football.Quarter.Value, Converter={x:Static converters:StringTercer.Instance}}" />
+        <TextBlock Grid.Column="2" Text="{Binding Football.Quarter.Value, Converter={x:Static converters:StringTercer.Instance}}" />
         
         <!-- down & left 2 go -->
-        <TextBlock Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" 
-                   FontSize="20" FontFamily="{StaticResource InterFont}" FontWeight="ExtraBold" 
-                   Text="{Binding Football.DownAndYards.Output}" />
+        <TextBlock Grid.Column="3" Text="{Binding Football.DownAndYards.Output}" />
     </Grid>
     
 </UserControl>

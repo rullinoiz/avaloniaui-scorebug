@@ -6,6 +6,7 @@ using Avalonia.Controls;
 using Avalonia.Threading;
 using scoreboard2.ViewModels;
 using scoreboard2.Views.Baseball;
+using scoreboard2.Views.Basketball;
 using scoreboard2.Views.Football;
 
 #if !(BROWSER || IOS || ANDROID)
@@ -30,18 +31,18 @@ public partial class ScorebugConfigView : UserControl
     {
         base.OnDataContextChanged(e);
         
-        ViewModel.PropertyChanged += (_, args) =>
+        ViewModel.PropertyChanged += async (_, args) =>
         {
             if (args.PropertyName == nameof(ViewModel.SelectedGame))
             {
-                Dispatcher.UIThread.Invoke(PopulateComboBox);
+                await Dispatcher.UIThread.InvokeAsync(PopulateComboBox);
             }
         };
-        Dispatcher.UIThread.Invoke(PopulateComboBox);
+        _ = Dispatcher.UIThread.InvokeAsync(PopulateComboBox);
     }
 
     private MainViewModel ViewModel => (MainViewModel)DataContext!;
-    private static readonly Type[] GameTypes = [typeof(BaseballScorebugViewBase), typeof(FootballScorebugViewBase)]; 
+    private static readonly Type[] GameTypes = [typeof(BaseballScorebugViewBase), typeof(FootballScorebugViewBase), typeof(BasketballScorebugViewBase)]; 
     private static readonly List<Type>[] GameViews = new List<Type>[GameTypes.Length];
 
     public void SpawnClickButtonFunction()
@@ -54,7 +55,12 @@ public partial class ScorebugConfigView : UserControl
         ViewModel.AddNewScorebugView(view);
 #endif
     }
-
+    
+    /// <summary>
+    /// This is a quick way to find all possible styles of scorebugs available for each game.
+    ///
+    /// Usually you'll only have to do this once
+    /// </summary>
     private static void PopulateGameViews()
     {
         for (var i = 0; i < GameTypes.Length; i++)

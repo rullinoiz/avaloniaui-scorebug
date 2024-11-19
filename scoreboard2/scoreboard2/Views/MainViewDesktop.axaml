@@ -5,6 +5,7 @@
              xmlns:vm="clr-namespace:scoreboard2.ViewModels"
              xmlns:baseball="using:scoreboard2.Views.Baseball"
              xmlns:football="using:scoreboard2.Views.Football"
+             xmlns:basketball="using:scoreboard2.Views.Basketball"
              mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="250"
              x:Class="scoreboard2.Views.MainViewDesktop"
              x:DataType="vm:MainViewModel">
@@ -23,6 +24,11 @@
         <TabItem Header="Football">
             <ScrollViewer>
                 <football:FootballConfigView />
+            </ScrollViewer>
+        </TabItem>
+        <TabItem Header="Basketball">
+            <ScrollViewer>
+                <basketball:BasketballConfigView />
             </ScrollViewer>
         </TabItem>
     </TabControl>

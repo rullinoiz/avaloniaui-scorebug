@@ -44,10 +44,6 @@
         <DependentUpon>BaseballConfigView.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
-      <Compile Update="Views\Baseball\BaseballScorebugViewMain.axaml.cs">
-        <DependentUpon>BaseballScorebugView.axaml</DependentUpon>
-        <SubType>Code</SubType>
-      </Compile>
       <Compile Update="Views\Basketball\BasketballConfigView.axaml.cs">
         <DependentUpon>BasketballConfigView.axaml</DependentUpon>
         <SubType>Code</SubType>
@@ -70,6 +66,18 @@
       </Compile>
       <Compile Update="Controls\Baseball\BasePickerControl.axaml.cs">
         <DependentUpon>BasePickerControl.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\Baseball\Designs\BaseballScorebugViewMain.axaml.cs">
+        <DependentUpon>BaseballScorebugViewMain.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\Football\Designs\FootballScorebugView.axaml.cs">
+        <DependentUpon>FootballScorebugView.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Controls\QuarterControl.axaml.cs">
+        <DependentUpon>QuarterControl.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
     </ItemGroup>

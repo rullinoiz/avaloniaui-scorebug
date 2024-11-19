@@ -92,10 +92,11 @@ public partial class ReplicatorService : ObservableObject
         {
             switch (o)
             {
-                case string _:
-                case int _:
-                case byte _:
-                case bool _:
+                case string:
+                case int:
+                case byte:
+                case bool:
+                case DateTime:
                     return;
             }
         }
@@ -107,8 +108,8 @@ public partial class ReplicatorService : ObservableObject
             
             var newPath = path is null ? p.Name : $"{path}.{p.Name}";
             
-            RegisterProperties(cls, cls.GetType().GetProperties(), newPath);
             Console.WriteLine($"{newPath} = {cls.GetType().Name}");
+            RegisterProperties(cls, cls.GetType().GetProperties(), newPath);
         }
     }
 

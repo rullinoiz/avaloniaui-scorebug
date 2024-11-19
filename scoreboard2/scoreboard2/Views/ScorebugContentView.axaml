@@ -3,8 +3,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:scoreboard2.ViewModels"
-             xmlns:baseball="using:scoreboard2.Views.Baseball"
-             xmlns:football="using:scoreboard2.Views.Football"
+             xmlns:baseball="using:scoreboard2.Views.Baseball.Designs"
+             xmlns:football="using:scoreboard2.Views.Football.Designs"
+             xmlns:basketball="using:scoreboard2.Views.Basketball.Designs"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="scoreboard2.Views.ScorebugContentView"
              x:DataType="vm:MainViewModel">
@@ -16,6 +17,7 @@
     <Carousel SelectedIndex="{Binding SelectedGame}">
         <baseball:BaseballScorebugViewMain />
         <football:FootballScorebugViewMain />
+        <basketball:BasketballScorebugViewMain />
     </Carousel>
     
 </UserControl>

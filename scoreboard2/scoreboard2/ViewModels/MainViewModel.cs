@@ -2,6 +2,7 @@ using System;
 using CommunityToolkit.Mvvm.ComponentModel;
 using scoreboard2.Models;
 using scoreboard2.Models.Baseball;
+using scoreboard2.Models.Basketball;
 using scoreboard2.Models.Football;
 using scoreboard2.ViewModels.Common;
 
@@ -18,6 +19,7 @@ public partial class MainViewModel : ViewModelBase
     public BaseGame BaseGame { get; } = new();
     public BaseballModel Baseball { get; } = new();
     public FootballModel Football { get; } = new();
+    public BasketballModel Basketball { get; } = new();
     
     [ObservableProperty] private int _selectedGame;
     

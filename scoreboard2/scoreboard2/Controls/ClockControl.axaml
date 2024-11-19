@@ -1,0 +1,26 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:scoreboard2.Controls">
+    <Design.PreviewWith>
+        <controls:ClockControl />
+    </Design.PreviewWith>
+
+    <Style Selector="controls|ClockControl">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <controls:ConfigEnclosureControl Title="{TemplateBinding Title}">
+                    <controls:ConfigEnclosureControl.Value>
+                        <Label Content="{Binding Clock.TimeLeft, RelativeSource={RelativeSource TemplatedParent}}" />
+                    </controls:ConfigEnclosureControl.Value>
+                    
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Content="Start" Command="{Binding Clock.Start, RelativeSource={RelativeSource TemplatedParent}}" />
+                        <Button Content="Reset" Command="{Binding Clock.Reset, RelativeSource={RelativeSource TemplatedParent}}" />
+                        <Button Content="Pause" Command="{Binding Clock.Pause, RelativeSource={RelativeSource TemplatedParent}}" />
+                    </StackPanel>
+                </controls:ConfigEnclosureControl>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

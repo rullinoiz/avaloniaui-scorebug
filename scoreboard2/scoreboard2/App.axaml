@@ -34,6 +34,7 @@
         <StyleInclude Source="avares://scoreboard2/Controls/Scoreboard/DotValueDisplaySmall.axaml" />
         
         <StyleInclude Source="avares://scoreboard2/Controls/Football/DownsAndYards2Go.axaml" />
+        <StyleInclude Source="avares://scoreboard2/Controls/ClockControl.axaml" />
 
     </Application.Styles>
              

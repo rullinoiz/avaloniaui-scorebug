@@ -13,5 +13,5 @@ public partial class FootballModel : ExtraModelBase
 
     public DownAndYards DownAndYards { get; } = new();
 
-    public Quarter Quarter { get; } = new ();
+    public Quarter Quarter { get; } = new();
 }
